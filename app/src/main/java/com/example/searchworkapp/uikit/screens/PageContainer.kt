@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -64,9 +66,9 @@ internal fun PageContainer(
         if (!fill) {
             Box(
                 modifier = Modifier
-                    .padding(top = 10.dp)
+                    .padding(top = 24.dp)
                     .clip(RoundedCornerShape(8.dp))
-//                    .background(AppTheme.colors.dark).width(48.dp).height(4.dp)
+                    .background(AppTheme.colors.gray2).width(38.dp).height(5.dp)
                     .align(Alignment.CenterHorizontally)
             )
         }

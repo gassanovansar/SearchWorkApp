@@ -14,6 +14,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
 import com.example.searchworkapp.base.RootNavigator
 import com.example.searchworkapp.feature.detail.DetailScreen
+import com.example.searchworkapp.feature.sendRequest.SendRequestBottomScreen
 import com.example.searchworkapp.uikit.theme.AppTheme
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -34,7 +35,7 @@ internal fun App() {
 //                Box(
 //                    modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)
 //                ) {
-                Navigator(DetailScreen()) {
+                Navigator(SendRequestBottomScreen()) {
                     CompositionLocalProvider(
                         RootNavigator provides it,
                     ) {

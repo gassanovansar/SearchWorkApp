@@ -1,5 +1,6 @@
 package com.example.searchworkapp.uikit.designe.toolBar
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,8 +10,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.searchworkapp.R
+import com.example.searchworkapp.base.ext.clickableRound
 import com.example.searchworkapp.uikit.theme.AppTheme
 
 
@@ -77,14 +83,14 @@ internal fun Toolbar(
 
 @Composable
 internal fun BackIcon(modifier: Modifier = Modifier, onClick: (() -> Unit)? = null) {
-//    val navigator = LocalNavigator.currentOrThrow
-//    Image(
-//        painter = AppResource.image.back.painterResource(),
-//        contentDescription = null,
-//        modifier = modifier.clickableRound(32.dp) {
-//            if (onClick == null) navigator.pop()
-//            else onClick()
-//        }
-//    )
+    val navigator = LocalNavigator.currentOrThrow
+    Image(
+        painter = painterResource(id = R.drawable.ic_back),
+        contentDescription = null,
+        modifier = modifier.clickableRound(32.dp) {
+            if (onClick == null) navigator.pop()
+            else onClick()
+        }
+    )
 }
 

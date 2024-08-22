@@ -7,6 +7,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 
 class AndroidApp : Application() {
+    companion object {
+        lateinit var INSTANCE: AndroidApp
+    }
 }
 
 class MainActivity : ComponentActivity() {

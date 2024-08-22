@@ -74,4 +74,9 @@ dependencies {
     implementation(libs.voyager.tabNavigator)
     implementation(libs.voyager.screenModel)
 
+    /**
+     * ImageLoader
+     */
+    implementation(libs.composeImageLoader)
+
 }

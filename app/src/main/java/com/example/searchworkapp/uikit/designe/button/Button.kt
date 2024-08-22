@@ -25,6 +25,10 @@ internal fun PrimaryButton(
     round: Round = Round.SQUARE,
     onClick: () -> Unit
 ) {
+    val style = when (size) {
+        Size.L, Size.XL -> AppTheme.typography.regular
+        Size.XXL -> AppTheme.typography.semiBold
+    }
     Button(
         enabled = enabled,
         modifier = modifier,
@@ -59,9 +63,15 @@ internal fun PrimaryButton(
             maxLines = 1,
             modifier = Modifier,
             text = text,
-            style = AppTheme.typography.regular.copy(
-                fontSize = 14.sp,
-                lineHeight = 18.2.sp,
+            style = style.copy(
+                fontSize = when (size) {
+                    Size.L, Size.XL -> 14.sp
+                    Size.XXL -> 16.sp
+                },
+                lineHeight = when (size) {
+                    Size.L, Size.XL -> 18.2.sp
+                    Size.XXL -> 20.8.sp
+                },
                 color = if (enabled) when (backgroundColor) {
                     ButtonColor.BLUE, ButtonColor.GREEN -> AppTheme.colors.white
                     ButtonColor.TRANSPARENT -> AppTheme.colors.blue
@@ -75,6 +85,7 @@ internal fun PrimaryButton(
         rightContent()
     }
 }
+
 
 enum class ButtonColor {
     BLUE, GREEN, TRANSPARENT

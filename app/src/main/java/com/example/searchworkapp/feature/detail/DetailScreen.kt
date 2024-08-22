@@ -18,7 +18,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import com.example.searchworkapp.R
+import com.example.searchworkapp.base.ext.clickableRound
+import com.example.searchworkapp.feature.sendRequest.SendRequestBottomScreen
 import com.example.searchworkapp.uikit.designe.appCard.AppCard
 import com.example.searchworkapp.uikit.designe.button.ButtonColor
 import com.example.searchworkapp.uikit.designe.button.PrimaryButton
@@ -30,6 +33,7 @@ import com.example.searchworkapp.uikit.theme.AppTheme
 class DetailScreen : Screen {
     @Composable
     override fun Content() {
+        val bottomSheetNavigator = LocalBottomSheetNavigator.current
         PageContainer(
             header = {
                 Toolbar(leftIcon = { BackIcon() }, rightIcon = {
@@ -92,9 +96,11 @@ class DetailScreen : Screen {
                         )
                     )
 
-                    Row(modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .padding(top = 24.dp)) {
+                    Row(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .padding(top = 24.dp)
+                    ) {
                         GreenItem(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -178,7 +184,9 @@ class DetailScreen : Screen {
                         QuestionsItem(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             title = "Где распологается место работы?"
-                        )
+                        ) {
+                            bottomSheetNavigator.show(SendRequestBottomScreen(true))
+                        }
                         if (index != 4) {
                             Spacer(modifier = Modifier.size(8.dp))
                         }
@@ -189,7 +197,9 @@ class DetailScreen : Screen {
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp)
-                    ) {}
+                    ) {
+                        bottomSheetNavigator.show(SendRequestBottomScreen())
+                    }
 
 
                 }
@@ -265,9 +275,11 @@ class DetailScreen : Screen {
     }
 
     @Composable
-    private fun QuestionsItem(modifier: Modifier, title: String) {
+    private fun QuestionsItem(modifier: Modifier, title: String, onClick: () -> Unit) {
         AppCard(
-            modifier = modifier,
+            modifier = modifier.clickableRound(50.dp) {
+                onClick()
+            },
             backgroundColor = AppTheme.colors.gray2,
             shape = RoundedCornerShape(50.dp)
         ) {

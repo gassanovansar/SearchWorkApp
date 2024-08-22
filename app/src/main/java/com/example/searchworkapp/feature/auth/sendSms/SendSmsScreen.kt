@@ -12,9 +12,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.searchworkapp.feature.tab.TabScreen
 import com.example.searchworkapp.uikit.designe.button.PrimaryButton
 import com.example.searchworkapp.uikit.designe.button.Size
 import com.example.searchworkapp.uikit.designe.otpTextFiled.OtpTextField
@@ -24,6 +28,8 @@ import com.example.searchworkapp.uikit.theme.AppTheme
 class SendSmsScreen : Screen {
     @Composable
     override fun Content() {
+        val keyboardController = LocalSoftwareKeyboardController.current
+        val navigator = LocalNavigator.currentOrThrow
         var otp by remember {
             mutableStateOf("")
         }
@@ -67,7 +73,10 @@ class SendSmsScreen : Screen {
                         .padding(horizontal = 16.dp),
                     size = Size.XXL,
                     text = "Продолжить",
-                ) {}
+                ) {
+                    navigator.push(TabScreen())
+
+                }
             }
         })
     }

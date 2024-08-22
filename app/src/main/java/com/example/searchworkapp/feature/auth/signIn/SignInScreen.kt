@@ -14,6 +14,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.searchworkapp.feature.auth.sendSms.SendSmsScreen
 import com.example.searchworkapp.uikit.designe.appCard.AppCard
 import com.example.searchworkapp.uikit.designe.appTextFiled.AppTextField
 import com.example.searchworkapp.uikit.designe.button.ButtonColor
@@ -27,6 +30,7 @@ import com.example.searchworkapp.uikit.theme.AppTheme
 class SignInScreen : Screen {
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
         PageContainer(header = {
             Toolbar(startTitle = "Вход в личный кабинет")
         }, content = {
@@ -63,7 +67,9 @@ class SignInScreen : Screen {
                                     .padding(end = 16.dp),
                                 size = Size.XL,
                                 text = "Продолжить",
-                            ) {}
+                            ) {
+                                navigator.push(SendSmsScreen())
+                            }
                             PrimaryButton(
                                 modifier = Modifier
                                     .fillMaxWidth()

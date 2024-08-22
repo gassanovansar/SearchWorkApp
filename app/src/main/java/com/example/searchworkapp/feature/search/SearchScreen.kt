@@ -1,5 +1,6 @@
 package com.example.searchworkapp.feature.search
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -9,10 +10,18 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.searchworkapp.R
+import com.example.searchworkapp.feature.detail.DetailScreen
+import com.example.searchworkapp.feature.sendRequest.SendRequestBottomScreen
 import com.example.searchworkapp.feature.tab.search.SearchItem
 import com.example.searchworkapp.uikit.designe.appCard.AppCard
 import com.example.searchworkapp.uikit.designe.appTextFiled.AppTextField
@@ -22,6 +31,8 @@ import com.example.searchworkapp.uikit.theme.AppTheme
 class SearchScreen : Screen {
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
+        val bottomSheetNavigator = LocalBottomSheetNavigator.current
         PageContainer(
             header = {
                 Row(
@@ -31,11 +42,16 @@ class SearchScreen : Screen {
                 ) {
                     AppTextField(value = "", modifier = Modifier.weight(1f)) {}
                     AppCard(
-                        backgroundColor = AppTheme.colors.white,
+                        backgroundColor = AppTheme.colors.gray2,
                         modifier = Modifier
                             .padding(start = 8.dp)
                             .size(40.dp)
                     ) {
+                        Image(
+                            modifier = Modifier.align(Alignment.Center),
+                            painter = painterResource(id = R.drawable.ic_filter),
+                            contentDescription = ""
+                        )
                     }
                 }
             },
@@ -44,7 +60,8 @@ class SearchScreen : Screen {
                     Row(
                         Modifier
                             .padding(horizontal = 16.dp)
-                            .padding(top = 8.dp, bottom = 9.dp)) {
+                            .padding(top = 8.dp, bottom = 9.dp)
+                    ) {
                         Text(
                             modifier = Modifier.weight(1f),
                             text = "145 вакансий",
@@ -57,6 +74,7 @@ class SearchScreen : Screen {
 
                         Row {
                             Text(
+                                modifier = Modifier.align(Alignment.CenterVertically),
                                 text = "По соответствию",
                                 style = AppTheme.typography.regular.copy(
                                     fontSize = 14.sp,
@@ -64,7 +82,12 @@ class SearchScreen : Screen {
                                     color = AppTheme.colors.blue,
                                 )
                             )
-                            //TODO FIX
+
+                            Image(
+                                modifier = Modifier.align(Alignment.CenterVertically),
+                                painter = painterResource(id = R.drawable.ic_arrows),
+                                contentDescription = ""
+                            )
 
                             AppCard(
                                 backgroundColor = AppTheme.colors.white,
@@ -83,7 +106,11 @@ class SearchScreen : Screen {
                         contentPadding = PaddingValues(16.dp)
                     ) {
                         items(10) {
-                            SearchItem()
+                            SearchItem(onClick = {
+                                navigator.push(DetailScreen())
+                            }, replyOnClick = {
+                                bottomSheetNavigator.show(SendRequestBottomScreen())
+                            })
                         }
                     }
                 }

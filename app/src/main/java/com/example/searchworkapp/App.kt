@@ -13,6 +13,7 @@ import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
 import com.example.searchworkapp.base.RootNavigator
+import com.example.searchworkapp.feature.splash.SplashScreen
 import com.example.searchworkapp.feature.tab.favourite.FavouriteScreen
 import com.example.searchworkapp.uikit.theme.AppTheme
 
@@ -34,7 +35,7 @@ internal fun App() {
 //                Box(
 //                    modifier = Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)
 //                ) {
-                Navigator(FavouriteScreen()) {
+                Navigator(SplashScreen()) {
                     CompositionLocalProvider(
                         RootNavigator provides it,
                     ) {

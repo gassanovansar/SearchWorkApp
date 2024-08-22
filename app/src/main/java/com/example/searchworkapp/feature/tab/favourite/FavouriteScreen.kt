@@ -8,6 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.searchworkapp.feature.detail.DetailScreen
+import com.example.searchworkapp.feature.sendRequest.SendRequestBottomScreen
 import com.example.searchworkapp.feature.tab.search.SearchItem
 import com.example.searchworkapp.uikit.designe.toolBar.Toolbar
 import com.example.searchworkapp.uikit.screens.PageContainer
@@ -16,6 +21,8 @@ import com.example.searchworkapp.uikit.theme.AppTheme
 class FavouriteScreen : Screen {
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
+        val bottomSheetNavigator = LocalBottomSheetNavigator.current
         PageContainer(header = {
             Toolbar(startTitle = "Избранное")
         }, content = {
@@ -35,7 +42,11 @@ class FavouriteScreen : Screen {
                     )
                 }
                 items(4) {
-                    SearchItem()
+                    SearchItem(onClick = {
+                        navigator.push(DetailScreen())
+                    }, replyOnClick = {
+                        bottomSheetNavigator.show(SendRequestBottomScreen())
+                    })
                 }
 
             }

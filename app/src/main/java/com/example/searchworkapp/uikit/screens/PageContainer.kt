@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
@@ -48,12 +49,17 @@ internal fun PageContainer(
     modifier = if (fill) {
         modifier
             .fillMaxHeight()
-            .windowInsetsPadding(WindowInsets.safeDrawing)
+//            .windowInsetsPadding(WindowInsets.safeDrawing)
     } else {
         modifier.padding(bottom = 12.dp)
     }
     val localFocusManager = LocalFocusManager.current
 
+    DisposableEffect(key1 = localFocusManager) {
+        onDispose {
+            localFocusManager.clearFocus(true)
+        }
+    }
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -68,7 +74,9 @@ internal fun PageContainer(
                 modifier = Modifier
                     .padding(top = 24.dp)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(AppTheme.colors.gray2).width(38.dp).height(5.dp)
+                    .background(AppTheme.colors.gray2)
+                    .width(38.dp)
+                    .height(5.dp)
                     .align(Alignment.CenterHorizontally)
             )
         }

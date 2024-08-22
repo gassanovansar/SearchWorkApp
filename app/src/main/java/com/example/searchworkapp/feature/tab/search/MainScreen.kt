@@ -1,5 +1,6 @@
 package com.example.searchworkapp.feature.tab.search
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -11,10 +12,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import com.example.searchworkapp.R
 import com.example.searchworkapp.uikit.designe.appCard.AppCard
 import com.example.searchworkapp.uikit.designe.appTextFiled.AppTextField
 import com.example.searchworkapp.uikit.designe.button.ButtonColor
@@ -24,7 +28,7 @@ import com.example.searchworkapp.uikit.designe.button.Size
 import com.example.searchworkapp.uikit.screens.PageContainer
 import com.example.searchworkapp.uikit.theme.AppTheme
 
-class SearchTabScreen : Screen {
+class MainScreen : Screen {
     @Composable
     override fun Content() {
         PageContainer(
@@ -138,7 +142,6 @@ fun SearchItem() {
         Column(modifier = Modifier.padding(16.dp)) {
 
             Row {
-
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = "Сейчас просматривает 1 человек",
@@ -171,6 +174,7 @@ fun SearchItem() {
 
                     Row(modifier = Modifier.padding(top = 4.dp)) {
                         Text(
+                            modifier = Modifier.align(Alignment.CenterVertically),
                             text = "Мобирикс",
                             style = AppTheme.typography.regular.copy(
                                 fontSize = 14.sp,
@@ -178,11 +182,24 @@ fun SearchItem() {
                                 color = AppTheme.colors.white,
                             )
                         )
-                        //TODO Fix
+                        Image(
+                            painterResource(id = R.drawable.ic_circle_check),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .padding(start = 8.dp)
+                                .align(Alignment.CenterVertically),
+                        )
                     }
                     Row(modifier = Modifier.padding(top = 10.dp)) {
-                        //TODO fix
+                        Image(
+                            painterResource(id = R.drawable.ic_suitcase),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .padding(end = 8.dp)
+                                .align(Alignment.CenterVertically),
+                        )
                         Text(
+                            modifier = Modifier.align(Alignment.CenterVertically),
                             text = "Опыт от 1 года до 3 лет",
                             style = AppTheme.typography.regular.copy(
                                 fontSize = 14.sp,
@@ -202,14 +219,13 @@ fun SearchItem() {
                     )
                 }
                 //TODO FIX
-
-                AppCard(
-                    backgroundColor = AppTheme.colors.white,
+                Image(
+                    painterResource(id = R.drawable.ic_favourite_on),
+                    contentDescription = "",
                     modifier = Modifier
                         .padding(start = 8.dp)
                         .size(24.dp)
-                ) {
-                }
+                )
 
             }
 

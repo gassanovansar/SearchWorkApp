@@ -95,10 +95,13 @@ dependencies {
     implementation(projects.uikit)
     implementation(projects.models)
     implementation(projects.features.main.ui)
+    implementation(projects.features.auth.ui)
+    implementation(projects.features.auth.domain)
     implementation(projects.features.main.domain)
     implementation(projects.features.detail.ui)
     implementation(projects.features.search.ui)
     implementation(projects.features.favourite.domain)
+    implementation(projects.features.favourite.ui)
     implementation(projects.features.detail.domain)
 
 }

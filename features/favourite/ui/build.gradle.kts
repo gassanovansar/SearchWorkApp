@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.auth.ui"
+    namespace = "com.example.favourite.ui"
     compileSdk = 34
 
     defaultConfig {
@@ -68,8 +68,8 @@ dependencies {
      * Modules
      */
     implementation(projects.core)
-    implementation(projects.uikit)
     implementation(projects.models)
-
-
+    implementation(projects.uikit)
+    implementation(projects.features.detail.ui)
+    implementation(projects.features.favourite.domain)
 }

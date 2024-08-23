@@ -1,5 +1,6 @@
 package com.example.searchworkapp.di
 
+import com.example.auth.domain.AuthUseCase
 import com.example.favourite.domain.AddFavouritesUseCase
 import com.example.favourite.domain.DeleteFavouritesUseCase
 import com.example.favourite.domain.FavouriteCountFlowUseCase
@@ -18,4 +19,5 @@ val useCaseModule = module {
     factory<FavouriteCountFlowUseCase> { FavouriteCountFlowUseCase(get()) }
     factory<AddFavouritesUseCase> { AddFavouritesUseCase(get()) }
     factory<DeleteFavouritesUseCase> { DeleteFavouritesUseCase(get()) }
+    factory<AuthUseCase> { AuthUseCase() }
 }

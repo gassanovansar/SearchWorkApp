@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.searchworkapp.feature.auth.signIn.SignInScreen
+import com.example.auth.ui.signIn.SignInScreen
 import com.example.uikit.screens.PageContainer
 import com.example.uikit.theme.AppTheme
 import kotlinx.coroutines.delay

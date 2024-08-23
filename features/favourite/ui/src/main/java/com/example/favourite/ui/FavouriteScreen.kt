@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
@@ -42,7 +43,7 @@ class FavouriteScreen : Screen {
 
                 item {
                     Text(
-                        text = "pluralStringResource(id = R.plurals.vacancy_1, state.favourites.size, state.favourites.size)",
+                        text = pluralStringResource(id = R.plurals.vacancy_1, state.favourites.size, state.favourites.size),
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,

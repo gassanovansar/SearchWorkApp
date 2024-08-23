@@ -1,7 +1,7 @@
 package com.example.auth.domain
 
-class AuthUseCase() {
-    suspend operator fun invoke(id: String) {
-        //TODO FIX
+class AuthUseCase(private val authRepository: AuthRepository) {
+    suspend operator fun invoke() {
+        authRepository.auth()
     }
 }

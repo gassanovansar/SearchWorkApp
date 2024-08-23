@@ -2,10 +2,15 @@ package com.example.source
 
 import android.content.Context
 import com.example.models.data.Data
+import com.example.source.ChangeFavourites.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
+
+private enum class ChangeFavourites(val boolean: Boolean) {
+    DELETE(false), ADD(true)
+}
 
 class LocalSource(private val context: Context) {
     private val jsonSerializer = Json {
@@ -45,21 +50,23 @@ class LocalSource(private val context: Context) {
         if (favorites.value.find { it == id } == null) {
             favorites.value += listOf(id)
         }
-        updateFavourite(id)
+        updateFavourite(id, ADD)
     }
 
     fun deleteFavourites(id: String) {
         if (favorites.value.find { it == id } != null) {
             favorites.value = favorites.value.filter { it != id }
         }
-        updateFavourite(id)
+        updateFavourite(id, DELETE)
     }
 
 
-    private fun updateFavourite(id: String) {
+    private fun updateFavourite(id: String, change: ChangeFavourites) {
         data = data?.copy(
             vacancies = data?.vacancies?.map {
-                if (it.id == id) it.copy(isFavorite = true) else it
+                if (it.id == id) it.copy(
+                    isFavorite = change.boolean
+                ) else it
             }.orEmpty()
         )
     }

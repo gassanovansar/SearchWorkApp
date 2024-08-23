@@ -71,6 +71,7 @@ dependencies {
     implementation(projects.core)
     implementation(projects.uikit)
     implementation(projects.models.domain)
+    implementation(projects.features.auth.domain)
 
 
 }

@@ -14,7 +14,7 @@ object MainTabScreen : BaseAuthTab {
 
     @Composable
     override fun AuthContent() {
-        Navigator(com.example.ui.MainScreen())
+        Navigator(MainScreen())
     }
 
 

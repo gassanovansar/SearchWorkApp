@@ -99,6 +99,7 @@ dependencies {
     implementation(projects.features.main.ui)
     implementation(projects.features.auth.ui)
     implementation(projects.features.auth.domain)
+    implementation(projects.features.auth.data)
     implementation(projects.features.main.domain)
     implementation(projects.features.main.data)
     implementation(projects.features.detail.ui)

@@ -1,14 +1,16 @@
 package com.example.auth.ui.sendSms
 
 import cafe.adriel.voyager.core.model.ScreenModel
-//import com.example.searchworkapp.data.sessionManager.SessionManager
+import cafe.adriel.voyager.core.model.screenModelScope
+import com.example.auth.domain.AuthUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class SendSmsScreenModel : ScreenModel, KoinComponent {
-//    private val sessionManager: SessionManager by inject()
+    private val authUseCase: AuthUseCase by inject()
 
     private val _state = MutableStateFlow(SendSmsState.Default)
     val state = _state.asStateFlow()
@@ -18,6 +20,8 @@ class SendSmsScreenModel : ScreenModel, KoinComponent {
     }
 
     fun changeIsAuth() {
-//        sessionManager.isAuth.value = true
+        screenModelScope.launch {
+            authUseCase()
+        }
     }
 }

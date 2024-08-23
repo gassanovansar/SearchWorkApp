@@ -19,5 +19,5 @@ val useCaseModule = module {
     factory<FavouriteCountFlowUseCase> { FavouriteCountFlowUseCase(get()) }
     factory<AddFavouritesUseCase> { AddFavouritesUseCase(get()) }
     factory<DeleteFavouritesUseCase> { DeleteFavouritesUseCase(get()) }
-    factory<AuthUseCase> { AuthUseCase() }
+    factory<AuthUseCase> { AuthUseCase(get()) }
 }

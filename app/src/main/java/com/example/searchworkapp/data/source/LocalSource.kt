@@ -20,15 +20,10 @@ class LocalSource(private val context: Context) {
 
     fun loadOffers() = loadSource().offers
 
-    fun loadVacancies(search: String, count: Int?): List<VacanciesResponse> {
-        val result = if (search.isNotBlank()) loadSource().vacancies.filter {
+    fun loadVacancies(search: String): List<VacanciesResponse> {
+        return if (search.isNotBlank()) loadSource().vacancies.filter {
             it.title?.contains(search, true) ?: false
         } else loadSource().vacancies
-        return if (count == null) {
-            result
-        } else {
-            result.take(count)
-        }
 
 
     }
@@ -38,6 +33,7 @@ class LocalSource(private val context: Context) {
 
 
 }
+
 
 @Serializable
 class Temp(

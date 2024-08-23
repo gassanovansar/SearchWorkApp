@@ -118,7 +118,7 @@ class MainScreen : Screen {
                             )
                         )
                     }
-                    items(state.vacancy) {
+                    items(state.vacancy.take(3)) {
                         Spacer(modifier = Modifier.size(16.dp))
                         SearchItem(
                             modifier = Modifier.padding(horizontal = 16.dp),
@@ -133,9 +133,9 @@ class MainScreen : Screen {
 
                     item {
                         Spacer(modifier = Modifier.size(16.dp))
-                        if (state.vacancy.size > 10) {
+                        if (state.vacancy.size > 3) {
                             PrimaryButton(
-                                text = "Еще ${state.vacancy.size - 10} вакансии",
+                                text = "Еще ${state.vacancy.size - 3} вакансии",
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(top = 8.dp, bottom = 8.dp)

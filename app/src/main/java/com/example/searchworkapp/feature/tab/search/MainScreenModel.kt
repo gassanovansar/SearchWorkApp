@@ -29,7 +29,7 @@ class MainScreenModel : ScreenModel, KoinComponent {
 
     fun loadVacancies() {
         screenModelScope.launch {
-            _state.value = _state.value.copy(vacancy = vacanciesUseCase(count = 10))
+            _state.value = _state.value.copy(vacancy = vacanciesUseCase())
         }
     }
 

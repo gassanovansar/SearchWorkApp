@@ -42,11 +42,11 @@ class FavouriteScreen : Screen {
                     )
                 }
                 items(4) {
-                    SearchItem(onClick = {
-                        navigator.push(DetailScreen())
-                    }, replyOnClick = {
-                        bottomSheetNavigator.show(SendRequestBottomScreen())
-                    })
+//                    SearchItem(onClick = {
+//                        navigator.push(DetailScreen())
+//                    }, replyOnClick = {
+//                        bottomSheetNavigator.show(SendRequestBottomScreen())
+//                    })
                 }
 
             }

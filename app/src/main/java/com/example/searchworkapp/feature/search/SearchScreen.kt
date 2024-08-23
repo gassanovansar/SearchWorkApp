@@ -84,18 +84,12 @@ class SearchScreen : Screen {
                             )
 
                             Image(
-                                modifier = Modifier.align(Alignment.CenterVertically),
+                                modifier = Modifier
+                                    .align(Alignment.CenterVertically)
+                                    .padding(start = 8.dp),
                                 painter = painterResource(id = R.drawable.ic_arrows),
                                 contentDescription = ""
                             )
-
-                            AppCard(
-                                backgroundColor = AppTheme.colors.white,
-                                modifier = Modifier
-                                    .padding(start = 8.dp)
-                                    .size(16.dp)
-                            ) {
-                            }
                         }
 
                     }
@@ -106,11 +100,11 @@ class SearchScreen : Screen {
                         contentPadding = PaddingValues(16.dp)
                     ) {
                         items(10) {
-                            SearchItem(onClick = {
-                                navigator.push(DetailScreen())
-                            }, replyOnClick = {
-                                bottomSheetNavigator.show(SendRequestBottomScreen())
-                            })
+//                            SearchItem(onClick = {
+//                                navigator.push(DetailScreen())
+//                            }, replyOnClick = {
+//                                bottomSheetNavigator.show(SendRequestBottomScreen())
+//                            })
                         }
                     }
                 }

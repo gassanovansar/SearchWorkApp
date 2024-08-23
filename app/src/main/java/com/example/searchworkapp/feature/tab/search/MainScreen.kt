@@ -11,8 +11,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,12 +25,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.searchworkapp.R
 import com.example.searchworkapp.base.ext.clickableRound
+import com.example.searchworkapp.domain.model.OfferButtonUI
+import com.example.searchworkapp.domain.model.OfferUI
+import com.example.searchworkapp.domain.model.VacancyUI
 import com.example.searchworkapp.feature.detail.DetailScreen
 import com.example.searchworkapp.feature.search.SearchScreen
 import com.example.searchworkapp.feature.sendRequest.SendRequestBottomScreen
@@ -45,7 +52,14 @@ class MainScreen : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val bottomSheetNavigator = LocalBottomSheetNavigator.current
+        val viewModel = rememberScreenModel { MainScreenModel() }
+        val state by viewModel.state.collectAsState()
+        LaunchedEffect(viewModel) {
+            viewModel.loadOffers()
+            viewModel.loadVacancies()
+        }
         PageContainer(
+            isLoading = viewModel.loading.collectAsState(false),
             header = {
                 Row(
                     modifier = Modifier
@@ -80,8 +94,8 @@ class MainScreen : Screen {
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
                         ) {
-                            items(3) {
-                                BannerItem()
+                            items(state.offers) {
+                                BannerItem(it)
                             }
                         }
                     }
@@ -97,13 +111,17 @@ class MainScreen : Screen {
                             )
                         )
                     }
-                    items(10) {
+                    items(state.vacancy) {
                         Spacer(modifier = Modifier.size(16.dp))
-                        SearchItem(modifier = Modifier.padding(horizontal = 16.dp), onClick = {
-                            navigator.push(DetailScreen())
-                        }, replyOnClick = {
-                            bottomSheetNavigator.show(SendRequestBottomScreen())
-                        })
+                        SearchItem(
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                            item = it,
+                            onClick = {
+                                navigator.push(DetailScreen())
+                            },
+                            replyOnClick = {
+                                bottomSheetNavigator.show(SendRequestBottomScreen())
+                            })
                     }
 
                     item {
@@ -136,7 +154,7 @@ class MainScreen : Screen {
     }
 
     @Composable
-    private fun BannerItem() {
+    private fun BannerItem(item: OfferUI) {
         //TODO Fix
         AppCard(modifier = Modifier.size(width = 132.dp, height = 120.dp)) {
             Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 10.dp)) {
@@ -149,7 +167,7 @@ class MainScreen : Screen {
                 }
                 Text(
                     modifier = Modifier.padding(top = 16.dp),
-                    text = "Вакансии рядом с вами",
+                    text = item.title,
                     style = AppTheme.typography.medium.copy(
                         fontSize = 14.sp,
                         lineHeight = 16.8.sp,
@@ -158,13 +176,15 @@ class MainScreen : Screen {
                     maxLines = 2
                 )
                 Text(
-                    text = "Поднять",
+                    text = item.button.title,
                     style = AppTheme.typography.regular.copy(
                         fontSize = 14.sp,
                         lineHeight = 16.8.sp,
                         color = AppTheme.colors.green,
                     )
                 )
+
+
             }
 
         }
@@ -173,8 +193,12 @@ class MainScreen : Screen {
 
 
 @Composable
-fun SearchItem(modifier: Modifier = Modifier, onClick: () -> Unit, replyOnClick: () -> Unit) {
-    var favourite by remember { mutableStateOf(false) }
+fun SearchItem(
+    modifier: Modifier = Modifier,
+    item: VacancyUI,
+    onClick: () -> Unit,
+    replyOnClick: () -> Unit
+) {
 
     AppCard(modifier = modifier.clickableRound(8.dp) {
         onClick()
@@ -184,7 +208,7 @@ fun SearchItem(modifier: Modifier = Modifier, onClick: () -> Unit, replyOnClick:
             Row {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = "Сейчас просматривает 1 человек",
+                        text = "Сейчас просматривает ${item.lookingNumber} человек",
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -194,7 +218,7 @@ fun SearchItem(modifier: Modifier = Modifier, onClick: () -> Unit, replyOnClick:
 
                     Text(
                         modifier = Modifier.padding(top = 10.dp),
-                        text = "UI/UX Designer",
+                        text = item.title,
                         style = AppTheme.typography.medium.copy(
                             fontSize = 16.sp,
                             lineHeight = 19.2.sp,
@@ -204,7 +228,7 @@ fun SearchItem(modifier: Modifier = Modifier, onClick: () -> Unit, replyOnClick:
 
                     Text(
                         modifier = Modifier.padding(top = 10.dp),
-                        text = "Минск ",
+                        text = item.address.town,
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -215,7 +239,7 @@ fun SearchItem(modifier: Modifier = Modifier, onClick: () -> Unit, replyOnClick:
                     Row(modifier = Modifier.padding(top = 4.dp)) {
                         Text(
                             modifier = Modifier.align(Alignment.CenterVertically),
-                            text = "Мобирикс",
+                            text = item.company,
                             style = AppTheme.typography.regular.copy(
                                 fontSize = 14.sp,
                                 lineHeight = 16.8.sp,
@@ -240,7 +264,7 @@ fun SearchItem(modifier: Modifier = Modifier, onClick: () -> Unit, replyOnClick:
                         )
                         Text(
                             modifier = Modifier.align(Alignment.CenterVertically),
-                            text = "Опыт от 1 года до 3 лет",
+                            text = item.experience.previewText,
                             style = AppTheme.typography.regular.copy(
                                 fontSize = 14.sp,
                                 lineHeight = 16.8.sp,
@@ -248,6 +272,8 @@ fun SearchItem(modifier: Modifier = Modifier, onClick: () -> Unit, replyOnClick:
                             )
                         )
                     }
+
+                    //TODO FIX
                     Text(
                         modifier = Modifier.padding(top = 10.dp),
                         text = "Опубликовано 20 февраля",
@@ -259,13 +285,12 @@ fun SearchItem(modifier: Modifier = Modifier, onClick: () -> Unit, replyOnClick:
                     )
                 }
                 Image(
-                    painterResource(id = if (favourite) R.drawable.ic_favourite_on else R.drawable.ic_favourite_off),
+                    painterResource(id = if (item.isFavorite) R.drawable.ic_favourite_on else R.drawable.ic_favourite_off),
                     contentDescription = "",
                     modifier = Modifier
                         .padding(start = 8.dp)
                         .size(24.dp)
                         .clickableRound(32.dp) {
-                            favourite = !favourite
                         }
                 )
 

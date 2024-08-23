@@ -3,10 +3,14 @@ package com.example.searchworkapp.feature.tab.favourite
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
@@ -23,6 +27,8 @@ class FavouriteScreen : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val bottomSheetNavigator = LocalBottomSheetNavigator.current
+        val viewModel = rememberScreenModel { FavouriteScreenModel() }
+        val state by viewModel.state.collectAsState()
         PageContainer(header = {
             Toolbar(startTitle = "Избранное")
         }, content = {
@@ -41,12 +47,12 @@ class FavouriteScreen : Screen {
                         )
                     )
                 }
-                items(4) {
-//                    SearchItem(onClick = {
-//                        navigator.push(DetailScreen())
-//                    }, replyOnClick = {
-//                        bottomSheetNavigator.show(SendRequestBottomScreen())
-//                    })
+                items(state.favourites) {
+                    SearchItem(item = it, onClick = {
+                        navigator.push(DetailScreen(it.id))
+                    }, replyOnClick = {
+                        bottomSheetNavigator.show(SendRequestBottomScreen())
+                    })
                 }
 
             }

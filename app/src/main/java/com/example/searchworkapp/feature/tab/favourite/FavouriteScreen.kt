@@ -39,7 +39,7 @@ class FavouriteScreen : Screen {
 
                 item {
                     Text(
-                        text = "1 вакансия",
+                        text = "${state.favourites.size} вакансия",
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,

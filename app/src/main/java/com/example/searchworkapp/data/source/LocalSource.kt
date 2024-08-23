@@ -1,6 +1,8 @@
 package com.example.searchworkapp.data.source
 
 import android.content.Context
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -24,9 +26,12 @@ class LocalSource(private val context: Context) {
         return if (search.isNotBlank()) loadSource().vacancies.filter {
             it.title?.contains(search, true) ?: false
         } else loadSource().vacancies
-
-
     }
+
+    val favouriteCountFlow: Flow<Int> =
+        flowOf(loadSource().vacancies.filter { it.isFavorite == true }.size)
+
+    fun loadFavourites() = loadSource().vacancies.filter { it.isFavorite == true }
 
 
     fun loadVacancy(id: String) = loadSource().vacancies.find { it.id == id }

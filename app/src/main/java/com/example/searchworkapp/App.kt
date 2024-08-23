@@ -17,7 +17,6 @@ import com.example.searchworkapp.feature.splash.SplashScreen
 import com.example.searchworkapp.feature.tab.TabScreen
 import com.example.searchworkapp.feature.tab.favourite.FavouriteScreen
 import com.example.searchworkapp.uikit.theme.AppTheme
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun App() {

@@ -4,13 +4,14 @@ import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import com.example.searchworkapp.data.source.LocalSource
 import com.example.searchworkapp.di.KoinInjector
-import com.example.searchworkapp.di.repositoryModule
-import com.example.searchworkapp.di.useCaseModule
+import com.example.searchworkapp.domain.useCase.FavouritesUseCase
+import kotlinx.coroutines.coroutineScope
 import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
+
+object FavouritesCount {
+    var count: Int = 0
+}
 
 class AndroidApp : Application() {
     companion object {

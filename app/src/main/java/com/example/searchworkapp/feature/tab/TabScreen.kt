@@ -13,12 +13,16 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
@@ -36,6 +40,11 @@ class TabScreen(private val tab: Tab = MainTabScreen) : Screen {
 
     @Composable
     override fun Content() {
+        val viewModel = rememberScreenModel { TabScreenModel() }
+        val state by viewModel.state.collectAsState()
+        LaunchedEffect(viewModel) {
+            viewModel.favouriteCount()
+        }
         TabNavigator(
             tab = tab,
             disposeNestedNavigators = true
@@ -52,7 +61,7 @@ class TabScreen(private val tab: Tab = MainTabScreen) : Screen {
                             .padding(vertical = 8.dp)
                     ) {
                         TabNavItem(MainTabScreen)
-                        TabNavItem(FavouriteTabScreen)
+                        TabNavItem(FavouriteTabScreen, state)
                         TabNavItem(ResponsesTabScreen)
                         TabNavItem(MessagesTabScreen)
                         TabNavItem(ProfileTabScreen)
@@ -63,7 +72,7 @@ class TabScreen(private val tab: Tab = MainTabScreen) : Screen {
     }
 
     @Composable
-    private fun RowScope.TabNavItem(tab: Tab) {
+    private fun RowScope.TabNavItem(tab: Tab, notificationCount: Int = 0) {
         val tabNavigator = LocalTabNavigator.current
         val selected = tabNavigator.current == tab
         val color = if (selected) AppTheme.colors.blue else AppTheme.colors.gray4
@@ -90,7 +99,7 @@ class TabScreen(private val tab: Tab = MainTabScreen) : Screen {
                             .size(24.dp)
 
                     )
-                    if (tab == FavouriteTabScreen) {
+                    if (tab == FavouriteTabScreen && notificationCount > 0) {
                         AppCard(
                             shape = CircleShape,
                             backgroundColor = AppTheme.colors.red,
@@ -101,7 +110,7 @@ class TabScreen(private val tab: Tab = MainTabScreen) : Screen {
                         ) {
                             Text(
                                 modifier = Modifier.align(Alignment.Center),
-                                text = "0",
+                                text = notificationCount.toString(),
                                 style = AppTheme.typography.semiBold.copy(
                                     fontSize = 7.sp,
                                     lineHeight = 7.7.sp,

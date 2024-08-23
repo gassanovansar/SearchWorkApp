@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -79,6 +80,7 @@ class SearchScreen : Screen {
                 }
             },
             content = {
+
                 Column {
                     Row(
                         Modifier
@@ -130,6 +132,33 @@ class SearchScreen : Screen {
                             }, item = it)
                         }
                     }
+                }
+                AppCard(
+                    backgroundColor = AppTheme.colors.gray2,
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(end = 16.dp, bottom = 24.dp),
+                    shape = RoundedCornerShape(50.dp)
+                ) {
+                    Row(Modifier.padding(12.dp)) {
+                        Image(
+                            modifier = Modifier.align(Alignment.CenterVertically),
+                            painter = painterResource(id = R.drawable.ic_map),
+                            contentDescription = ""
+                        )
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 8.dp)
+                                .align(Alignment.CenterVertically),
+                            text = "Карта",
+                            style = AppTheme.typography.medium.copy(
+                                fontSize = 16.sp,
+                                lineHeight = 19.2.sp,
+                                color = AppTheme.colors.white,
+                            )
+                        )
+                    }
+
                 }
             })
     }

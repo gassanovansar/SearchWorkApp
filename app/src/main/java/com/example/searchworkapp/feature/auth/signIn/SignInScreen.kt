@@ -22,6 +22,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.searchworkapp.R
+import com.example.searchworkapp.base.ext.clickableRound
 import com.example.searchworkapp.feature.auth.sendSms.SendSmsScreen
 import com.example.searchworkapp.uikit.designe.appCard.AppCard
 import com.example.searchworkapp.uikit.designe.appTextFiled.AppTextField
@@ -63,6 +64,17 @@ class SignInScreen : Screen {
                             value = state.email,
                             hint = "Электронная почта или телефон",
                             modifier = Modifier.padding(vertical = 16.dp),
+                            right = if (state.isValid) {
+                                {
+                                    Image(
+                                        modifier = Modifier.clickableRound(4.dp) {
+                                            viewModel.changeEmail("")
+                                        },
+                                        painter = painterResource(id = R.drawable.ic_close),
+                                        contentDescription = ""
+                                    )
+                                }
+                            } else null,
                             left = {
                                 Image(
                                     painter = painterResource(id = R.drawable.ic_envelope),

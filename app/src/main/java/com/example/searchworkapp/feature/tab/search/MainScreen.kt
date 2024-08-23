@@ -31,6 +31,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.searchworkapp.R
+import com.example.searchworkapp.base.ext.clickableDebounce
 import com.example.searchworkapp.base.ext.clickableRound
 import com.example.searchworkapp.domain.model.OfferButtonUI
 import com.example.searchworkapp.domain.model.OfferUI
@@ -70,7 +71,7 @@ class MainScreen : Screen {
                         value = "",
                         modifier = Modifier.weight(1f),
                         enabled = false,
-                        hint = "Поиск",
+                        hint = "Должность, ключевые слова",
                         left = {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_search),
@@ -96,17 +97,18 @@ class MainScreen : Screen {
             },
             content = {
                 LazyColumn {
-                    item {
-                        LazyRow(
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
-                        ) {
-                            items(state.offers) {
-                                BannerItem(it)
+                    if (state.offers.isNotEmpty()) {
+                        item {
+                            LazyRow(
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
+                            ) {
+                                items(state.offers) {
+                                    BannerItem(it)
+                                }
                             }
                         }
                     }
-
                     item {
                         Text(
                             modifier = Modifier.padding(top = 24.dp, start = 16.dp),
@@ -125,6 +127,9 @@ class MainScreen : Screen {
                             item = it,
                             onClick = {
                                 navigator.push(DetailScreen(it.id))
+                            },
+                            isFavouriteOnClick = {
+                                viewModel.isFavourites(it)
                             },
                             replyOnClick = {
                                 bottomSheetNavigator.show(SendRequestBottomScreen())
@@ -193,6 +198,7 @@ fun SearchItem(
     modifier: Modifier = Modifier,
     item: VacancyUI,
     onClick: () -> Unit,
+    isFavouriteOnClick: () -> Unit,
     replyOnClick: () -> Unit
 ) {
 
@@ -286,7 +292,8 @@ fun SearchItem(
                     modifier = Modifier
                         .padding(start = 8.dp)
                         .size(24.dp)
-                        .clickableRound(32.dp) {
+                        .clickableDebounce {
+                            isFavouriteOnClick()
                         }
                 )
 

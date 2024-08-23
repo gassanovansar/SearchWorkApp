@@ -1,8 +1,12 @@
 package com.example.searchworkapp.data.source
 
 import android.content.Context
+import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -12,12 +16,24 @@ class LocalSource(private val context: Context) {
         ignoreUnknownKeys = true
         explicitNulls = false
     }
+    private val favorites: MutableStateFlow<List<String>> =
+        MutableStateFlow(loadSource().vacancies.filter { it.isFavorite == true }
+            .map { it.id.orEmpty() })
 
+    private var temp: Temp? = null
     private fun loadSource(): Temp {
-        val json = context.assets.open("data.json").bufferedReader().use {
-            it.readText()
+        return if (temp == null) {
+            val json = context.assets.open("data.json").bufferedReader().use {
+                it.readText()
+            }
+            jsonSerializer.decodeFromString<Temp>(json).also {
+                temp = it
+            }
+        } else {
+            temp!!
         }
-        return jsonSerializer.decodeFromString<Temp>(json)
+
+
     }
 
     fun loadOffers() = loadSource().offers
@@ -28,10 +44,25 @@ class LocalSource(private val context: Context) {
         } else loadSource().vacancies
     }
 
-    val favouriteCountFlow: Flow<Int> =
-        flowOf(loadSource().vacancies.filter { it.isFavorite == true }.size)
+    val favouriteCountFlow: Flow<Int> = favorites.map { it.size }
 
     fun loadFavourites() = loadSource().vacancies.filter { it.isFavorite == true }
+    fun addFavourites(id: String) {
+        if (favorites.value.find { it == id } == null) {
+            favorites.value += listOf(id)
+        }
+        temp =
+            temp?.copy(vacancies = temp?.vacancies?.map { if (it.id == id) it.copy(isFavorite = true) else it }
+                .orEmpty())
+    }
+
+    fun deleteFavourites(id: String) {
+        if (favorites.value.find { it == id } != null) {
+            favorites.value = favorites.value.filter { it != id }
+        }
+        temp = temp?.copy(vacancies = temp?.vacancies?.map { if (it.id == id) it.copy(isFavorite = true) else it }
+                .orEmpty())
+    }
 
 
     fun loadVacancy(id: String) = loadSource().vacancies.find { it.id == id }
@@ -41,7 +72,7 @@ class LocalSource(private val context: Context) {
 
 
 @Serializable
-class Temp(
+data class Temp(
     val offers: List<OfferResponse>,
     val vacancies: List<VacanciesResponse>
 )
@@ -58,7 +89,7 @@ class OfferResponse(
 class OfferButtonResponse(val text: String?)
 
 @Serializable
-class VacanciesResponse(
+data class VacanciesResponse(
     val id: String?,
     val lookingNumber: Int?,
     val title: String?,

@@ -1,4 +1,4 @@
-package com.example.searchworkapp.domain.useCase
+package com.example.searchworkapp.domain.useCase.offers
 
 import com.example.searchworkapp.domain.model.OfferUI
 import com.example.searchworkapp.domain.repository.OffersRepository

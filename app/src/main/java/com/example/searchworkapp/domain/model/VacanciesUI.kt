@@ -1,7 +1,7 @@
 package com.example.searchworkapp.domain.model
 
 
-class VacancyUI(
+data class VacancyUI(
     val id: String,
     val lookingNumber: Int,
     val title: String,

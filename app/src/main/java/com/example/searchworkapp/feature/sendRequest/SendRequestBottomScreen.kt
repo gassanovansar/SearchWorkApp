@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import com.example.searchworkapp.R
 import com.example.searchworkapp.base.ext.clickableRound
 import com.example.searchworkapp.uikit.designe.appCard.AppCard
@@ -40,6 +41,7 @@ class SendRequestBottomScreen(private val question: String = "") : Screen {
     override fun Content() {
         val viewModel = rememberScreenModel { SendRequestBottomScreenModel() }
         val state by viewModel.state.collectAsState()
+        val bottomSheetNavigator = LocalBottomSheetNavigator.current
         LaunchedEffect(viewModel) {
             viewModel.changeQuestion(question)
         }
@@ -93,7 +95,7 @@ class SendRequestBottomScreen(private val question: String = "") : Screen {
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
                         .padding(top = if (question.isNotBlank()) 11.dp else 20.dp, bottom = 32.dp)
-                ) {}
+                ) { bottomSheetNavigator.hide() }
             }
 
         })

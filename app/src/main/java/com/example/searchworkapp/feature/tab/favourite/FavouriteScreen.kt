@@ -54,6 +54,8 @@ class FavouriteScreen : Screen {
                 items(state.favourites) {
                     SearchItem(item = it, onClick = {
                         navigator.push(DetailScreen(it.id))
+                    }, isFavouriteOnClick = {
+                        viewModel.isFavourites(it)
                     }, replyOnClick = {
                         bottomSheetNavigator.show(SendRequestBottomScreen())
                     })

@@ -23,6 +23,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import com.example.searchworkapp.R
+import com.example.searchworkapp.base.ext.clickableDebounce
 import com.example.searchworkapp.base.ext.clickableRound
 import com.example.searchworkapp.domain.model.VacancyAddressUI
 import com.example.searchworkapp.feature.sendRequest.SendRequestBottomScreen
@@ -57,7 +58,10 @@ class DetailScreen(private val id: String) : Screen {
                             modifier = Modifier.padding(horizontal = 16.dp)
                         )
                         Image(
-                            painterResource(if (state.vacancy.isFavorite) R.drawable.ic_favourite_on else R.drawable.ic_favourite_off),
+                            modifier = Modifier.clickableDebounce {
+                                viewModel.isFavourites()
+                            },
+                            painter = painterResource(if (state.vacancy.isFavorite) R.drawable.ic_favourite_on else R.drawable.ic_favourite_off),
                             contentDescription = "",
                         )
 

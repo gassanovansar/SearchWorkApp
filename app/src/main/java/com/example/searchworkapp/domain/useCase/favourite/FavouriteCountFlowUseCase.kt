@@ -1,4 +1,4 @@
-package com.example.searchworkapp.domain.useCase
+package com.example.searchworkapp.domain.useCase.favourite
 
 import com.example.searchworkapp.domain.repository.FavouriteRepository
 import kotlinx.coroutines.flow.Flow

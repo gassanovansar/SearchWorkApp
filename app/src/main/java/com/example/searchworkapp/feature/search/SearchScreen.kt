@@ -26,6 +26,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.searchworkapp.R
+import com.example.searchworkapp.base.ext.clickableRound
 import com.example.searchworkapp.feature.detail.DetailScreen
 import com.example.searchworkapp.feature.sendRequest.SendRequestBottomScreen
 import com.example.searchworkapp.feature.tab.search.SearchItem
@@ -55,10 +56,13 @@ class SearchScreen : Screen {
                     AppTextField(
                         value = state.search,
                         modifier = Modifier.weight(1f),
-                        hint = "Поиск",
+                        hint = "Должность, ключевые слова",
                         left = {
                             Image(
-                                painter = painterResource(id = R.drawable.ic_search),
+                                modifier = Modifier.clickableRound(4.dp) {
+                                    navigator.pop()
+                                },
+                                painter = painterResource(id = R.drawable.ic_back),
                                 contentDescription = ""
                             )
                         }
@@ -127,6 +131,8 @@ class SearchScreen : Screen {
                         items(state.vacancy) {
                             SearchItem(onClick = {
                                 navigator.push(DetailScreen(it.id))
+                            }, isFavouriteOnClick = {
+                                viewModel.isFavourites(it)
                             }, replyOnClick = {
                                 bottomSheetNavigator.show(SendRequestBottomScreen())
                             }, item = it)

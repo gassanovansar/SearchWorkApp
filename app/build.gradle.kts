@@ -93,15 +93,22 @@ dependencies {
 
     implementation(projects.core)
     implementation(projects.uikit)
-    implementation(projects.models)
+    implementation(projects.models.domain)
+    implementation(projects.models.data)
+    implementation(projects.models.mappers)
     implementation(projects.features.main.ui)
     implementation(projects.features.auth.ui)
     implementation(projects.features.auth.domain)
     implementation(projects.features.main.domain)
+    implementation(projects.features.main.data)
     implementation(projects.features.detail.ui)
+    implementation(projects.features.detail.data)
     implementation(projects.features.search.ui)
     implementation(projects.features.favourite.domain)
+    implementation(projects.features.favourite.data)
     implementation(projects.features.favourite.ui)
     implementation(projects.features.detail.domain)
+    implementation(projects.source)
+    implementation(projects.managers)
 
 }

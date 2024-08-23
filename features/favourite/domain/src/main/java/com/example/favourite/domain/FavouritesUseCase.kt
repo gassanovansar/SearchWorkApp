@@ -1,6 +1,6 @@
 package com.example.favourite.domain
 
-import com.example.models.VacancyUI
+import com.example.models.domain.VacancyUI
 
 
 class FavouritesUseCase(private val repository: FavouriteRepository) {

@@ -27,7 +27,6 @@ import com.example.core.ext.clickableDebounce
 import com.example.core.ext.clickableRound
 import com.example.detail.ui.R
 import com.example.detail.ui.sendRequest.SendRequestBottomScreen
-import com.example.models.VacancyAddressUI
 import com.example.uikit.designe.appCard.AppCard
 import com.example.uikit.designe.button.ButtonColor
 import com.example.uikit.designe.button.PrimaryButton
@@ -36,7 +35,7 @@ import com.example.uikit.designe.toolBar.Toolbar
 import com.example.uikit.screens.PageContainer
 import com.example.uikit.theme.AppTheme
 
-class DetailScreen( val id: String) : Screen {
+class DetailScreen(val id: String) : Screen {
     @Composable
     override fun Content() {
         val bottomSheetNavigator = LocalBottomSheetNavigator.current
@@ -266,7 +265,11 @@ class DetailScreen( val id: String) : Screen {
     }
 
     @Composable
-    private fun MapItem(modifier: Modifier, item: VacancyAddressUI, company: String) {
+    private fun MapItem(
+        modifier: Modifier,
+        item: com.example.models.domain.VacancyAddressUI,
+        company: String
+    ) {
         AppCard(modifier) {
             Column(modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp)) {
                 Row {

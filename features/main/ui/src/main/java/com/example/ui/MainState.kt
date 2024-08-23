@@ -1,7 +1,7 @@
 package com.example.ui
 
-import com.example.models.OfferUI
-import com.example.models.VacancyUI
+import com.example.models.domain.OfferUI
+import com.example.models.domain.VacancyUI
 
 data class MainState(
     val offers: List<OfferUI>,

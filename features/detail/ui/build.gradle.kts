@@ -67,7 +67,7 @@ dependencies {
 
     implementation(projects.core)
     implementation(projects.uikit)
-    implementation(projects.models)
+    implementation(projects.models.domain)
     implementation(projects.features.detail.domain)
     implementation(projects.features.favourite.domain)
 }

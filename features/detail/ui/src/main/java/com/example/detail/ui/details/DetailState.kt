@@ -1,6 +1,6 @@
 package com.example.detail.ui.details
 
-import com.example.models.VacancyUI
+import com.example.models.domain.VacancyUI
 
 
 data class DetailState(val vacancy: VacancyUI) {

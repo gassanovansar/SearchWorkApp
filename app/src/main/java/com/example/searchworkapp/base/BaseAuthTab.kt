@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.Tab
-import com.example.searchworkapp.data.sessionManager.SessionManager
+import com.example.managers.SessionManager
 import com.example.searchworkapp.di.KoinInjector
 import com.example.auth.ui.signIn.SignInScreen
 

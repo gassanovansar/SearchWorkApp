@@ -6,7 +6,7 @@ import com.example.favourite.domain.AddFavouritesUseCase
 import com.example.favourite.domain.DeleteFavouritesUseCase
 import com.example.main.domain.OffersUseCase
 import com.example.main.domain.VacanciesUseCase
-import com.example.models.VacancyUI
+import com.example.models.domain.VacancyUI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

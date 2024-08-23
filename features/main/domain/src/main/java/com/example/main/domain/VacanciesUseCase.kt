@@ -1,6 +1,7 @@
 package com.example.main.domain
 
-import com.example.models.VacancyUI
+import com.example.models.domain.VacancyUI
+
 
 class VacanciesUseCase(private val repository: MainRepository) {
 

@@ -37,6 +37,7 @@ android {
     buildFeatures {
         compose = true
     }
+
 }
 
 dependencies {
@@ -60,5 +61,5 @@ dependencies {
     implementation(libs.voyager.screenModel)
 
     implementation(projects.core)
-    implementation(projects.models)
+    implementation(projects.models.domain)
 }

@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.core.ext.clickableDebounce
 import com.example.core.ext.clickableRound
-import com.example.models.VacancyUI
+import com.example.models.domain.VacancyUI
 import com.example.uikit.R
 import com.example.uikit.designe.appCard.AppCard
 import com.example.uikit.designe.button.ButtonColor

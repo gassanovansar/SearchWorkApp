@@ -1,6 +1,6 @@
 package com.example.search.ui
 
-import com.example.models.VacancyUI
+import com.example.models.domain.VacancyUI
 
 data class SearchState(
     val search: String,

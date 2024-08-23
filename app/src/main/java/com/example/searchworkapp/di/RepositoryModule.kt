@@ -1,11 +1,11 @@
 package com.example.searchworkapp.di
 
 import com.example.detail.domain.DetailRepository
-import com.example.searchworkapp.data.repository.FavouriteRepositoryImpl
-import com.example.searchworkapp.data.repository.MainRepositoryImpl
+import com.example.data.MainRepositoryImpl
 import com.example.favourite.domain.FavouriteRepository
 import com.example.main.domain.MainRepository
-import com.example.searchworkapp.data.repository.DetailRepositoryImpl
+import com.example.detail.data.DetailRepositoryImpl
+import com.example.favourite.data.FavouriteRepositoryImpl
 import org.koin.dsl.module
 
 val repositoryModule = module {

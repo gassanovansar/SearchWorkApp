@@ -32,8 +32,8 @@ import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.core.ext.clickableRound
 import com.example.detail.ui.details.DetailScreen
-import com.example.models.Icon
-import com.example.models.OfferUI
+import com.example.models.domain.Icon
+import com.example.models.domain.OfferUI
 import com.example.search.ui.SearchScreen
 import com.example.uikit.components.SearchItem
 import com.example.uikit.designe.appCard.AppCard
@@ -161,10 +161,10 @@ class MainScreen : Screen {
                     modifier = Modifier,
                     painter = painterResource(
                         id = when (item.icon) {
-                            Icon.NearVacancies -> R.drawable.ic_near_vacancies
-                            Icon.LevelUpResume -> R.drawable.ic_level_up_resume
-                            Icon.TemporaryJob -> R.drawable.ic_temporary_job
-                            Icon.Empty -> R.drawable.ic_empty
+                            com.example.models.domain.Icon.NearVacancies -> R.drawable.ic_near_vacancies
+                            com.example.models.domain.Icon.LevelUpResume -> R.drawable.ic_level_up_resume
+                            com.example.models.domain.Icon.TemporaryJob -> R.drawable.ic_temporary_job
+                            com.example.models.domain.Icon.Empty -> R.drawable.ic_empty
                         }
                     ), contentDescription = ""
                 )

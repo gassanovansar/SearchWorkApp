@@ -5,7 +5,7 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import com.example.favourite.domain.AddFavouritesUseCase
 import com.example.favourite.domain.DeleteFavouritesUseCase
 import com.example.favourite.domain.FavouritesUseCase
-import com.example.models.VacancyUI
+import com.example.models.domain.VacancyUI
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

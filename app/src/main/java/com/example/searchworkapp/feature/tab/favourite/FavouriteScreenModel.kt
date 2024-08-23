@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class FavouriteScreenModel : ScreenModel,KoinComponent {
+class FavouriteScreenModel : ScreenModel, KoinComponent {
 
     private val _loading = MutableStateFlow(false)
     val loading = _loading.asStateFlow()

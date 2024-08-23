@@ -6,8 +6,8 @@ import com.example.searchworkapp.domain.model.VacancyUI
 import com.example.searchworkapp.domain.repository.VacanciesRepository
 
 class VacanciesRepositoryImpl(private val source: LocalSource) : VacanciesRepository {
-    override suspend fun vacancies(search: String): List<VacancyUI> {
-        return source.loadVacancies(search).map { it.toUI() }
+    override suspend fun vacancies(search: String, count: Int?): List<VacancyUI> {
+        return source.loadVacancies(search, count).map { it.toUI() }
     }
 
     override suspend fun vacancy(id: String): VacancyUI {

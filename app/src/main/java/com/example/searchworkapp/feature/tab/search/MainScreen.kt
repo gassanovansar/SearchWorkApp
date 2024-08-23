@@ -132,30 +132,19 @@ class MainScreen : Screen {
                     }
 
                     item {
-                        PrimaryButton(
-                            text = "Еще 143 вакансии",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 24.dp, bottom = 8.dp)
-                                .padding(horizontal = 16.dp)
-                        ) {
-                            navigator.push(SearchScreen())
+                        Spacer(modifier = Modifier.size(16.dp))
+                        if (state.vacancy.size > 10) {
+                            PrimaryButton(
+                                text = "Еще ${state.vacancy.size - 10} вакансии",
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 8.dp, bottom = 8.dp)
+                                    .padding(horizontal = 16.dp)
+                            ) {
+                                navigator.push(SearchScreen())
+                            }
                         }
                     }
-
-
-//                    LazyColumn(
-//                        modifier = Modifier.padding(top = 8.dp),
-//                        verticalArrangement = Arrangement.spacedBy(16.dp),
-//                        contentPadding = PaddingValues(
-//                            start = 16.dp,
-//                            end = 16.dp,
-//                            bottom = 16.dp,
-//                            top = 8.dp
-//                        )
-//                    ) {
-//
-//                    }
                 }
             })
     }

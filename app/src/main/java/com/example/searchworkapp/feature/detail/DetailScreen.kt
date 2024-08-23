@@ -17,6 +17,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
@@ -101,7 +102,8 @@ class DetailScreen(private val id: String) : Screen {
                         modifier = Modifier
                             .padding(top = 6.dp)
                             .padding(horizontal = 16.dp),
-                        text = state.vacancy.schedules.joinToString(", "),
+                        text = state.vacancy.schedules.joinToString(", ")
+                            .replaceFirstChar(Char::titlecase),
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -114,21 +116,37 @@ class DetailScreen(private val id: String) : Screen {
                             .padding(horizontal = 16.dp)
                             .padding(top = 24.dp)
                     ) {
-                        GreenItem(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f),
-                            title = "${state.vacancy.appliedNumber} человек уже откликнулись",
-                            image = R.drawable.ic_circle_profile
-                        )
-                        Spacer(modifier = Modifier.size(8.dp))
-                        GreenItem(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f),
-                            title = "${state.vacancy.lookingNumber} человека сейчас смотрят",
-                            image = R.drawable.ic_circle_eye
-                        )
+                        if (state.vacancy.appliedNumber > 0) {
+                            GreenItem(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .weight(1f),
+                                title = pluralStringResource(
+                                    id = R.plurals.human_1,
+                                    state.vacancy.appliedNumber,
+                                    state.vacancy.appliedNumber
+                                ),
+                                image = R.drawable.ic_circle_profile
+                            )
+                        }
+                        if (state.vacancy.lookingNumber > 0 && state.vacancy.appliedNumber > 0){
+                            Spacer(modifier = Modifier.size(8.dp))
+                        }
+
+                        if (state.vacancy.lookingNumber > 0) {
+                            GreenItem(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .weight(1f),
+                                title = pluralStringResource(
+                                    id = R.plurals.human_2,
+                                    state.vacancy.lookingNumber,
+                                    state.vacancy.lookingNumber
+                                ),
+                                image = R.drawable.ic_circle_eye
+                            )
+                        }
+
                     }
                     MapItem(
                         modifier = Modifier
@@ -231,6 +249,7 @@ class DetailScreen(private val id: String) : Screen {
                         lineHeight = 16.8.sp,
                         color = AppTheme.colors.white,
                     ),
+                    minLines = 2,
                     maxLines = 2
                 )
 

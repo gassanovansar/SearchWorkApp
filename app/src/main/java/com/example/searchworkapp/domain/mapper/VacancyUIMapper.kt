@@ -1,9 +1,9 @@
 package com.example.searchworkapp.domain.mapper
 
-import com.example.searchworkapp.data.source.VacanciesAddressResponse
-import com.example.searchworkapp.data.source.VacanciesExperienceResponse
-import com.example.searchworkapp.data.source.VacanciesResponse
-import com.example.searchworkapp.data.source.VacanciesSalaryResponse
+import com.example.searchworkapp.data.model.VacanciesAddressResponse
+import com.example.searchworkapp.data.model.VacanciesExperienceResponse
+import com.example.searchworkapp.data.model.VacanciesResponse
+import com.example.searchworkapp.data.model.VacanciesSalaryResponse
 import com.example.searchworkapp.domain.model.VacancyAddressUI
 import com.example.searchworkapp.domain.model.VacancyExperienceUI
 import com.example.searchworkapp.domain.model.VacancySalaryUI

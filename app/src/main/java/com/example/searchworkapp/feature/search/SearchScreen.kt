@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
@@ -93,7 +94,7 @@ class SearchScreen : Screen {
                     ) {
                         Text(
                             modifier = Modifier.weight(1f),
-                            text = "${state.vacancy.size} вакансий",
+                            text = pluralStringResource(id = R.plurals.vacancy_1, state.vacancy.size,state.vacancy.size),
                             style = AppTheme.typography.regular.copy(
                                 fontSize = 14.sp,
                                 lineHeight = 16.8.sp,
@@ -133,8 +134,6 @@ class SearchScreen : Screen {
                                 navigator.push(DetailScreen(it.id))
                             }, isFavouriteOnClick = {
                                 viewModel.isFavourites(it)
-                            }, replyOnClick = {
-                                bottomSheetNavigator.show(SendRequestBottomScreen())
                             }, item = it)
                         }
                     }

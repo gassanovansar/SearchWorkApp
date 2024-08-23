@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -33,6 +34,7 @@ import com.example.searchworkapp.uikit.designe.button.Size
 import com.example.searchworkapp.uikit.designe.toolBar.Toolbar
 import com.example.searchworkapp.uikit.screens.PageContainer
 import com.example.searchworkapp.uikit.theme.AppTheme
+import kotlinx.coroutines.flow.collectLatest
 
 class SignInScreen : Screen {
     @Composable
@@ -40,6 +42,15 @@ class SignInScreen : Screen {
         val navigator = LocalNavigator.currentOrThrow
         val viewModel = rememberScreenModel { SignInScreenModel() }
         val state by viewModel.state.collectAsState()
+        LaunchedEffect(viewModel) {
+            viewModel.event.collectLatest {
+                when (it) {
+                    SignInEvent.Next -> {
+                        navigator.push(SendSmsScreen(state.email))
+                    }
+                }
+            }
+        }
         PageContainer(header = {
             Toolbar(startTitle = "Вход в личный кабинет")
         }, content = {
@@ -62,7 +73,8 @@ class SignInScreen : Screen {
 
                         AppTextField(
                             value = state.email,
-                            hint = "Электронная почта или телефон",
+                            error = state.isError,
+                            hint = "Электронная почта",
                             modifier = Modifier.padding(vertical = 16.dp),
                             right = if (state.isValid) {
                                 {
@@ -95,7 +107,7 @@ class SignInScreen : Screen {
                                 size = Size.XL,
                                 text = "Продолжить",
                             ) {
-                                navigator.push(SendSmsScreen())
+                                viewModel.signIn()
                             }
                             PrimaryButton(
                                 modifier = Modifier

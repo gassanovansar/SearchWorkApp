@@ -16,6 +16,9 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
+import com.example.searchworkapp.base.RootNavigator
+import com.example.searchworkapp.feature.tab.MainTabScreen
 import com.example.searchworkapp.feature.tab.TabScreen
 import com.example.searchworkapp.uikit.designe.button.PrimaryButton
 import com.example.searchworkapp.uikit.designe.button.Size
@@ -23,10 +26,9 @@ import com.example.searchworkapp.uikit.designe.otpTextFiled.OtpTextField
 import com.example.searchworkapp.uikit.screens.PageContainer
 import com.example.searchworkapp.uikit.theme.AppTheme
 
-class SendSmsScreen : Screen {
+class SendSmsScreen(private val email: String) : Screen {
     @Composable
     override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
         val viewModel = rememberScreenModel { SendSmsScreenModel() }
         val state by viewModel.state.collectAsState()
         PageContainer(content = {
@@ -34,7 +36,7 @@ class SendSmsScreen : Screen {
                 Spacer(modifier = Modifier.size(130.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 16.dp),
-                    text = "Отправили код на example@mail.ru",
+                    text = "Отправили код на $email",
                     style = AppTheme.typography.semiBold.copy(
                         fontSize = 20.sp,
                         lineHeight = 24.sp,
@@ -71,7 +73,7 @@ class SendSmsScreen : Screen {
                     enabled = state.isValid,
                     text = "Продолжить",
                 ) {
-                    navigator.push(TabScreen())
+                    viewModel.changeIsAuth()
                 }
             }
         })

@@ -1,6 +1,9 @@
 package com.example.searchworkapp.uikit.designe.appTextFiled
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -76,78 +79,79 @@ internal fun AppTextField(
         isFocused -> AppTheme.colors.gray1
         else -> AppTheme.colors.gray1
     }
-
-    Card(
-        shape = shape,
-        elevation = 0.dp,
-        modifier = modifier
-            .defaultMinSize(minHeight = 40.dp)
-            .clickableRound(8.dp) {
-                onClick()
-            },
-        backgroundColor = backgroundColor,
-    ) {
-        Row(modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)) {
-            val keyboardController = LocalSoftwareKeyboardController.current
-            left?.invoke()
-            BasicTextField(
-                interactionSource = source,
-                enabled = enabled,
-                visualTransformation = if (passwordState) {
-                    PasswordVisualTransformation()
-                } else visualTransformation,
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = keyboardType,
-                    imeAction = ImeAction.Done
-                ),
-                keyboardActions = KeyboardActions(
-                    onDone = { keyboardController?.hide() }),
-                value = _value,
-                onValueChange = {
-                    if (maxLength != null) {
-                        if (it.length <= maxLength) {
+    Column(modifier = modifier) {
+        Card(
+            shape = shape,
+            elevation = 0.dp,
+            modifier = Modifier
+                .defaultMinSize(minHeight = 40.dp)
+                .clickableRound(8.dp) {
+                    onClick()
+                },
+            border = if (error) BorderStroke(1.dp, AppTheme.colors.red) else null,
+            backgroundColor = backgroundColor,
+        ) {
+            Row(modifier = Modifier.padding(horizontal = 8.dp, vertical = 8.dp)) {
+                val keyboardController = LocalSoftwareKeyboardController.current
+                left?.invoke()
+                BasicTextField(
+                    interactionSource = source,
+                    enabled = enabled,
+                    visualTransformation = if (passwordState) {
+                        PasswordVisualTransformation()
+                    } else visualTransformation,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = keyboardType,
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = { keyboardController?.hide() }),
+                    value = _value,
+                    onValueChange = {
+                        if (maxLength != null) {
+                            if (it.length <= maxLength) {
+                                onValueChange(it)
+                                _value = it
+                            }
+                        } else {
                             onValueChange(it)
                             _value = it
                         }
-                    } else {
-                        onValueChange(it)
-                        _value = it
-                    }
 
-                },
-                minLines = minLines,
-                singleLine = minLines == 1,
-                modifier = Modifier
-                    .onFocusChanged {
-                        isFocused = it.isFocused
-                    }
-                    .align(Alignment.CenterVertically)
-                    .wrapContentSize(Alignment.Center)
-                    .fillMaxWidth()
-                    .padding(start = 4.dp)
-                    .weight(1f, fill),
-                textStyle = AppTheme.typography.regular.copy(
-                    fontSize = 14.sp,
-                    lineHeight = 16.8.sp,
-                    color = if (error) AppTheme.colors.red else textColor
-                ),
-                decorationBox = { innerTextField ->
-                    if (_value.isEmpty() && hint.isNotEmpty()) {
-                        Text(
-                            text = hint,
-                            style = AppTheme.typography.regular.copy(
-                                fontSize = 14.sp,
-                                lineHeight = 16.8.sp,
-                                color = AppTheme.colors.gray4,
-                            ),
-                            maxLines = 1
-                        )
-                    }
-                    innerTextField()
-                },
-                cursorBrush = SolidColor(AppTheme.colors.gray4),
-            )
-            if (password) {
+                    },
+                    minLines = minLines,
+                    singleLine = minLines == 1,
+                    modifier = Modifier
+                        .onFocusChanged {
+                            isFocused = it.isFocused
+                        }
+                        .align(Alignment.CenterVertically)
+                        .wrapContentSize(Alignment.Center)
+                        .fillMaxWidth()
+                        .padding(start = 4.dp)
+                        .weight(1f, fill),
+                    textStyle = AppTheme.typography.regular.copy(
+                        fontSize = 14.sp,
+                        lineHeight = 16.8.sp,
+                        color = if (error) AppTheme.colors.red else textColor
+                    ),
+                    decorationBox = { innerTextField ->
+                        if (_value.isEmpty() && hint.isNotEmpty()) {
+                            Text(
+                                text = hint,
+                                style = AppTheme.typography.regular.copy(
+                                    fontSize = 14.sp,
+                                    lineHeight = 16.8.sp,
+                                    color = AppTheme.colors.gray4,
+                                ),
+                                maxLines = 1
+                            )
+                        }
+                        innerTextField()
+                    },
+                    cursorBrush = SolidColor(AppTheme.colors.gray4),
+                )
+                if (password) {
 //                Image(
 //                    painter = if (passwordState) AppResource.image.passwordstateno.painterResource() else AppResource.image.passwordstateyes.painterResource(),
 //                    contentDescription = null,
@@ -156,8 +160,20 @@ internal fun AppTextField(
 //                    }
 //                )
 
-            } else right?.invoke()
+                } else right?.invoke()
 
+            }
+        }
+        AnimatedVisibility(visible = error) {
+            Text(
+                modifier = Modifier.padding(top = 8.dp),
+                text = "Вы ввели неверный e-mail",
+                style = AppTheme.typography.regular.copy(
+                    fontSize = 13.sp,
+                    lineHeight = 18.sp,
+                    color = AppTheme.colors.red,
+                )
+            )
         }
     }
 }

@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -24,14 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import com.example.searchworkapp.base.RootNavigator
 import com.example.searchworkapp.base.ext.clickableRound
+import com.example.searchworkapp.data.sessionManager.SessionManager
+import com.example.searchworkapp.di.KoinInjector
 import com.example.searchworkapp.uikit.designe.appCard.AppCard
 import com.example.searchworkapp.uikit.screens.PageContainer
 import com.example.searchworkapp.uikit.theme.AppTheme
@@ -97,7 +94,6 @@ class TabScreen(private val tab: Tab = MainTabScreen) : Screen {
                                 end = if (tab == FavouriteTabScreen) 4.dp else 0.dp
                             )
                             .size(24.dp)
-
                     )
                     if (tab == FavouriteTabScreen && notificationCount > 0) {
                         AppCard(
@@ -118,12 +114,9 @@ class TabScreen(private val tab: Tab = MainTabScreen) : Screen {
                                     textAlign = TextAlign.Center,
                                 )
                             )
-
                         }
                     }
-
                 }
-
             }
             Text(
                 text = tab.options.title,

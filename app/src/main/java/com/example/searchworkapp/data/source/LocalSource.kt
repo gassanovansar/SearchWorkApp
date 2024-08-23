@@ -1,127 +1,68 @@
 package com.example.searchworkapp.data.source
 
 import android.content.Context
-import androidx.compose.runtime.mutableStateOf
+import com.example.searchworkapp.data.model.Data
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
 class LocalSource(private val context: Context) {
-
     private val jsonSerializer = Json {
         ignoreUnknownKeys = true
         explicitNulls = false
     }
+    private var data: Data? = null
+
     private val favorites: MutableStateFlow<List<String>> =
         MutableStateFlow(loadSource().vacancies.filter { it.isFavorite == true }
             .map { it.id.orEmpty() })
 
-    private var temp: Temp? = null
-    private fun loadSource(): Temp {
-        return if (temp == null) {
-            val json = context.assets.open("data.json").bufferedReader().use {
-                it.readText()
-            }
-            jsonSerializer.decodeFromString<Temp>(json).also {
-                temp = it
-            }
+    private fun loadSource(): Data {
+        return if (data == null) {
+            val json = context.assets.open("data.json").bufferedReader().use { it.readText() }
+            jsonSerializer.decodeFromString<Data>(json).also { data = it }
         } else {
-            temp!!
+            data!!
         }
-
-
     }
 
     fun loadOffers() = loadSource().offers
 
-    fun loadVacancies(search: String): List<VacanciesResponse> {
-        return if (search.isNotBlank()) loadSource().vacancies.filter {
-            it.title?.contains(search, true) ?: false
-        } else loadSource().vacancies
-    }
+    fun loadVacancies(search: String) = if (search.isNotBlank()) loadSource().vacancies.filter {
+        it.title?.contains(search, true) ?: false
+    } else loadSource().vacancies
 
     val favouriteCountFlow: Flow<Int> = favorites.map { it.size }
 
+    fun loadVacancy(id: String) = loadSource().vacancies.find { it.id == id }
+
+
     fun loadFavourites() = loadSource().vacancies.filter { it.isFavorite == true }
+
+
     fun addFavourites(id: String) {
         if (favorites.value.find { it == id } == null) {
             favorites.value += listOf(id)
         }
-        temp =
-            temp?.copy(vacancies = temp?.vacancies?.map { if (it.id == id) it.copy(isFavorite = true) else it }
-                .orEmpty())
+        updateFavourite(id)
     }
 
     fun deleteFavourites(id: String) {
         if (favorites.value.find { it == id } != null) {
             favorites.value = favorites.value.filter { it != id }
         }
-        temp = temp?.copy(vacancies = temp?.vacancies?.map { if (it.id == id) it.copy(isFavorite = true) else it }
-                .orEmpty())
+        updateFavourite(id)
     }
 
 
-    fun loadVacancy(id: String) = loadSource().vacancies.find { it.id == id }
-
-
+    private fun updateFavourite(id: String) {
+        data = data?.copy(
+            vacancies = data?.vacancies?.map {
+                if (it.id == id) it.copy(isFavorite = true) else it
+            }.orEmpty()
+        )
+    }
 }
-
-
-@Serializable
-data class Temp(
-    val offers: List<OfferResponse>,
-    val vacancies: List<VacanciesResponse>
-)
-
-@Serializable
-class OfferResponse(
-    val id: String?,
-    val title: String?,
-    val button: OfferButtonResponse?,
-    val link: String?
-)
-
-@Serializable
-class OfferButtonResponse(val text: String?)
-
-@Serializable
-data class VacanciesResponse(
-    val id: String?,
-    val lookingNumber: Int?,
-    val title: String?,
-    val address: VacanciesAddressResponse?,
-    val company: String?,
-    val experience: VacanciesExperienceResponse?,
-    val publishedDate: String?,
-    val isFavorite: Boolean?,
-    val salary: VacanciesSalaryResponse?,
-    val schedules: List<String>?,
-    val appliedNumber: Int?,
-    val description: String?,
-    val responsibilities: String?,
-    val questions: List<String>?
-)
-
-@Serializable
-class VacanciesAddressResponse(
-    val town: String?,
-    val street: String?,
-    val house: String?
-)
-
-@Serializable
-class VacanciesExperienceResponse(
-    val previewText: String?,
-    val text: String?,
-)
-
-@Serializable
-class VacanciesSalaryResponse(
-    val full: String?,
-)
 
 

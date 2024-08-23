@@ -12,6 +12,7 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,7 +24,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import com.example.searchworkapp.R
 import com.example.searchworkapp.base.ext.clickableRound
 import com.example.searchworkapp.uikit.designe.appCard.AppCard
@@ -33,10 +36,16 @@ import com.example.searchworkapp.uikit.designe.button.PrimaryButton
 import com.example.searchworkapp.uikit.screens.PageContainer
 import com.example.searchworkapp.uikit.theme.AppTheme
 
-class SendRequestBottomScreen(private val question: Boolean = false) : Screen {
+class SendRequestBottomScreen(private val question: String = "") : Screen {
     @Composable
     override fun Content() {
-        var _question by remember { mutableStateOf(question) }
+        val viewModel = rememberScreenModel { SendRequestBottomScreenModel() }
+        val state by viewModel.state.collectAsState()
+        val bottomSheetNavigator = LocalBottomSheetNavigator.current
+        LaunchedEffect(viewModel) {
+            viewModel.changeQuestion(question)
+        }
+        var isVisible by remember { mutableStateOf(question.isNotBlank()) }
 
         PageContainer(fill = false, content = {
             Column {
@@ -52,9 +61,9 @@ class SendRequestBottomScreen(private val question: Boolean = false) : Screen {
                         .padding(horizontal = 16.dp)
                         .padding(top = 26.dp)
                 )
-                AnimatedVisibility(visible = _question) {
+                AnimatedVisibility(visible = isVisible) {
                     DefaultTextFiled(
-                        value = "",
+                        value = state.question,
                         hint = "Ваше сопроводительное письмо",
                         modifier = Modifier.padding(top = 16.dp),
                         minLines = 4
@@ -62,13 +71,13 @@ class SendRequestBottomScreen(private val question: Boolean = false) : Screen {
                 }
                 AnimatedVisibility(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
-                    visible = !_question
+                    visible = !isVisible
                 ) {
                     Text(
                         modifier = Modifier
                             .padding(top = 40.dp)
                             .clickableRound(2.dp) {
-                                _question = true
+                                isVisible = true
                             },
                         text = "Добавить сопроводительное",
                         style = AppTheme.typography.semiBold.copy(
@@ -85,8 +94,8 @@ class SendRequestBottomScreen(private val question: Boolean = false) : Screen {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
-                        .padding(top = if (question) 11.dp else 20.dp, bottom = 32.dp)
-                ) {}
+                        .padding(top = if (question.isNotBlank()) 11.dp else 20.dp, bottom = 32.dp)
+                ) { bottomSheetNavigator.hide() }
             }
 
         })

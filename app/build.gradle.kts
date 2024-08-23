@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    kotlin("plugin.serialization") version "2.0.0"
 }
 
 android {
@@ -78,5 +79,16 @@ dependencies {
      * ImageLoader
      */
     implementation(libs.composeImageLoader)
+
+    /**
+     * Koin
+     */
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+
+    /**
+     * Serialization
+     */
+    implementation(libs.kotlinx.serialization.json)
 
 }

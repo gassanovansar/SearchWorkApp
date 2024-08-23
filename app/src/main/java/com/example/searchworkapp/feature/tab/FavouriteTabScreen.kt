@@ -2,21 +2,19 @@ package com.example.searchworkapp.feature.tab
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
-import cafe.adriel.voyager.navigator.CurrentScreen
+import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.example.searchworkapp.R
+import com.example.searchworkapp.base.BaseAuthTab
 import com.example.searchworkapp.feature.tab.favourite.FavouriteScreen
-import com.example.searchworkapp.feature.tab.search.MainScreen
 
-object FavouriteTabScreen : Tab {
+object FavouriteTabScreen : BaseAuthTab {
+    override val key: ScreenKey = "FavouriteTabScreen"
 
     @Composable
-    override fun Content() {
-        Navigator(FavouriteScreen()) {
-            CurrentScreen()
-        }
+    override fun AuthContent() {
+        Navigator(screen = FavouriteScreen())
     }
 
 

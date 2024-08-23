@@ -117,7 +117,7 @@ class MainScreen : Screen {
                             modifier = Modifier.padding(horizontal = 16.dp),
                             item = it,
                             onClick = {
-                                navigator.push(DetailScreen())
+                                navigator.push(DetailScreen(it.id))
                             },
                             replyOnClick = {
                                 bottomSheetNavigator.show(SendRequestBottomScreen())

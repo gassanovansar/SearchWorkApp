@@ -21,6 +21,7 @@ class LocalSource(private val context: Context) {
     fun loadOffers() = loadSource().offers
 
     fun loadVacancies() = loadSource().vacancies
+    fun loadVacancy(id: String) = loadSource().vacancies.find { it.id == id }
 
 
 }

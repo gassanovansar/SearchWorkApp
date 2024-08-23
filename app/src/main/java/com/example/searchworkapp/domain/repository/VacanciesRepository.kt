@@ -5,4 +5,5 @@ import com.example.searchworkapp.domain.model.VacancyUI
 
 interface VacanciesRepository {
     suspend fun vacancies(): List<VacancyUI>
+    suspend fun vacancy(id: String): VacancyUI
 }

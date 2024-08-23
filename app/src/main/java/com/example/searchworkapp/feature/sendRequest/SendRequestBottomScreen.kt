@@ -33,7 +33,7 @@ import com.example.searchworkapp.uikit.designe.button.PrimaryButton
 import com.example.searchworkapp.uikit.screens.PageContainer
 import com.example.searchworkapp.uikit.theme.AppTheme
 
-class SendRequestBottomScreen(private val question: Boolean = false) : Screen {
+class SendRequestBottomScreen(private val question: String = "") : Screen {
     @Composable
     override fun Content() {
         var _question by remember { mutableStateOf(question) }
@@ -52,7 +52,7 @@ class SendRequestBottomScreen(private val question: Boolean = false) : Screen {
                         .padding(horizontal = 16.dp)
                         .padding(top = 26.dp)
                 )
-                AnimatedVisibility(visible = _question) {
+                AnimatedVisibility(visible = _question.isNotBlank()) {
                     DefaultTextFiled(
                         value = "",
                         hint = "Ваше сопроводительное письмо",
@@ -62,13 +62,13 @@ class SendRequestBottomScreen(private val question: Boolean = false) : Screen {
                 }
                 AnimatedVisibility(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
-                    visible = !_question
+                    visible = _question.isBlank()
                 ) {
                     Text(
                         modifier = Modifier
                             .padding(top = 40.dp)
                             .clickableRound(2.dp) {
-                                _question = true
+                                _question = "0"
                             },
                         text = "Добавить сопроводительное",
                         style = AppTheme.typography.semiBold.copy(
@@ -85,7 +85,7 @@ class SendRequestBottomScreen(private val question: Boolean = false) : Screen {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
-                        .padding(top = if (question) 11.dp else 20.dp, bottom = 32.dp)
+                        .padding(top = if (question.isNotBlank()) 11.dp else 20.dp, bottom = 32.dp)
                 ) {}
             }
 

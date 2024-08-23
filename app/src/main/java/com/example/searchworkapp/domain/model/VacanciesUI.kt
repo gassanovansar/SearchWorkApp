@@ -16,7 +16,27 @@ class VacancyUI(
     val description: String,
     val responsibilities: String,
     val questions: List<String>
-)
+) {
+    companion object {
+        val Default = VacancyUI(
+            id = "",
+            lookingNumber = 0,
+            title = "",
+            address = VacancyAddressUI.Default,
+            company = "",
+            experience = VacancyExperienceUI.Default,
+            publishedDate = "",
+            isFavorite = false,
+            salary = VacancySalaryUI.Default,
+            schedules = emptyList(),
+            appliedNumber = 0,
+            description = "",
+            responsibilities = "",
+            questions = emptyList()
+
+        )
+    }
+}
 
 
 class VacancyAddressUI(

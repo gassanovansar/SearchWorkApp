@@ -9,4 +9,8 @@ class VacanciesRepositoryImpl(private val source: LocalSource) : VacanciesReposi
     override suspend fun vacancies(): List<VacancyUI> {
         return source.loadVacancies().map { it.toUI() }
     }
+
+    override suspend fun vacancy(id: String): VacancyUI {
+        return source.loadVacancy(id)?.toUI() ?: VacancyUI.Default
+    }
 }

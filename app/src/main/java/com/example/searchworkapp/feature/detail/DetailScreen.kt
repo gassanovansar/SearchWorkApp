@@ -11,16 +11,20 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import com.example.searchworkapp.R
 import com.example.searchworkapp.base.ext.clickableRound
+import com.example.searchworkapp.domain.model.VacancyAddressUI
 import com.example.searchworkapp.feature.sendRequest.SendRequestBottomScreen
 import com.example.searchworkapp.uikit.designe.appCard.AppCard
 import com.example.searchworkapp.uikit.designe.button.ButtonColor
@@ -30,10 +34,15 @@ import com.example.searchworkapp.uikit.designe.toolBar.Toolbar
 import com.example.searchworkapp.uikit.screens.PageContainer
 import com.example.searchworkapp.uikit.theme.AppTheme
 
-class DetailScreen : Screen {
+class DetailScreen(private val id: String) : Screen {
     @Composable
     override fun Content() {
         val bottomSheetNavigator = LocalBottomSheetNavigator.current
+        val viewModel = rememberScreenModel { DetailScreenModel() }
+        val state by viewModel.state.collectAsState()
+        LaunchedEffect(viewModel) {
+            viewModel.loadVacancy(id)
+        }
         PageContainer(
             header = {
                 Toolbar(leftIcon = { BackIcon() }, rightIcon = {
@@ -48,7 +57,7 @@ class DetailScreen : Screen {
                             modifier = Modifier.padding(horizontal = 16.dp)
                         )
                         Image(
-                            painterResource(R.drawable.ic_favourite_on),
+                            painterResource(if (state.vacancy.isFavorite) R.drawable.ic_favourite_on else R.drawable.ic_favourite_off),
                             contentDescription = "",
                         )
 
@@ -59,7 +68,7 @@ class DetailScreen : Screen {
                 Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                     Text(
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        text = "UI/UX Designer",
+                        text = state.vacancy.title,
                         style = AppTheme.typography.semiBold.copy(
                             fontSize = 22.sp,
                             lineHeight = 26.4.sp,
@@ -68,7 +77,7 @@ class DetailScreen : Screen {
                     )
                     Text(
                         modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp),
-                        text = "Уровень дохода не указан",
+                        text = state.vacancy.salary.full,
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -77,7 +86,7 @@ class DetailScreen : Screen {
                     )
                     Text(
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        text = "Требуемый опыт: от 1 года до 3 лет",
+                        text = "Требуемый опыт: ${state.vacancy.experience.previewText}",
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -88,7 +97,7 @@ class DetailScreen : Screen {
                         modifier = Modifier
                             .padding(top = 6.dp)
                             .padding(horizontal = 16.dp),
-                        text = "Полная занятость, полный день",
+                        text = state.vacancy.schedules.joinToString(", "),
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -105,7 +114,7 @@ class DetailScreen : Screen {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(1f),
-                            title = "147 человек уже откликнулись",
+                            title = "${state.vacancy.appliedNumber} человек уже откликнулись",
                             image = R.drawable.ic_circle_profile
                         )
                         Spacer(modifier = Modifier.size(8.dp))
@@ -113,19 +122,19 @@ class DetailScreen : Screen {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(1f),
-                            title = "2 человека сейчас смотрят",
+                            title = "${state.vacancy.lookingNumber} человека сейчас смотрят",
                             image = R.drawable.ic_circle_eye
                         )
                     }
                     MapItem(
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
-                            .padding(top = 24.dp)
+                            .padding(top = 24.dp), state.vacancy.address, state.vacancy.company
                     )
 
                     Text(
                         modifier = Modifier.padding(16.dp),
-                        text = "MOBYRIX - динамично развивающаяся продуктовая IT-компания, специализирующаяся на разработке мобильных приложений для iOS и Android. Наша команда работает над собственными продуктами в разнообразных сферах: от утилит до развлечений и бизнес-приложений. Мы ценим талант и стремление к инновациям и в данный момент в поиске талантливого UX/UI Designer, готового присоединиться к нашей команде и внести значимый вклад в развитие наших проектов.",
+                        text = state.vacancy.description,
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -147,7 +156,7 @@ class DetailScreen : Screen {
                         modifier = Modifier
                             .padding(horizontal = 16.dp)
                             .padding(top = 8.dp),
-                        text = "-Проектировать пользовательский опыт, проводить UX исследования; -Разрабатывать адаптивный дизайн интерфейса для мобильных приложений; -Разрабатывать быстрые прототипы для тестирования идеи дизайна и их последующая; интеграция на основе обратной связи от команды и пользователей; -Взаимодействовать с командой разработчиков для обеспечения точной реализации ваших дизайнов; -Анализ пользовательского опыта и адаптация под тренды.",
+                        text = state.vacancy.responsibilities,
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -180,12 +189,12 @@ class DetailScreen : Screen {
                     )
                     Spacer(modifier = Modifier.size(16.dp))
 
-                    (0..4).forEachIndexed { index, it ->
+                    state.vacancy.questions.forEachIndexed { index, it ->
                         QuestionsItem(
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            title = "Где распологается место работы?"
+                            title = it
                         ) {
-                            bottomSheetNavigator.show(SendRequestBottomScreen(true))
+                            bottomSheetNavigator.show(SendRequestBottomScreen(it))
                         }
                         if (index != 4) {
                             Spacer(modifier = Modifier.size(8.dp))
@@ -200,8 +209,6 @@ class DetailScreen : Screen {
                     ) {
                         bottomSheetNavigator.show(SendRequestBottomScreen())
                     }
-
-
                 }
 
             })
@@ -236,12 +243,12 @@ class DetailScreen : Screen {
     }
 
     @Composable
-    private fun MapItem(modifier: Modifier) {
+    private fun MapItem(modifier: Modifier, item: VacancyAddressUI, company: String) {
         AppCard(modifier) {
             Column(modifier = Modifier.padding(vertical = 12.dp, horizontal = 16.dp)) {
                 Row {
                     Text(
-                        text = "Мобирикс",
+                        text = company,
                         style = AppTheme.typography.medium.copy(
                             fontSize = 16.sp,
                             lineHeight = 19.2.sp,
@@ -262,8 +269,10 @@ class DetailScreen : Screen {
                         .padding(vertical = 8.dp)
                 )
 
+                val address = listOf(item.town, item.street, item.house)
+
                 Text(
-                    text = "Минск, улица Бирюзова, 4/5",
+                    text = address.joinToString(", "),
                     style = AppTheme.typography.regular.copy(
                         fontSize = 14.sp,
                         lineHeight = 16.8.sp,

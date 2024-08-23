@@ -70,6 +70,13 @@ class MainScreen : Screen {
                         value = "",
                         modifier = Modifier.weight(1f),
                         enabled = false,
+                        hint = "Поиск",
+                        left = {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_search),
+                                contentDescription = ""
+                            )
+                        },
                         onClick = {
                             navigator.push(SearchScreen())
                         }) {}

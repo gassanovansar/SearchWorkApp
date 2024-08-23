@@ -20,7 +20,10 @@ class LocalSource(private val context: Context) {
 
     fun loadOffers() = loadSource().offers
 
-    fun loadVacancies() = loadSource().vacancies
+    fun loadVacancies(search: String) = if (search.isNotBlank()) loadSource().vacancies.filter {
+        it.title?.contains(search, true) ?: false
+    } else loadSource().vacancies
+
     fun loadVacancy(id: String) = loadSource().vacancies.find { it.id == id }
 
 

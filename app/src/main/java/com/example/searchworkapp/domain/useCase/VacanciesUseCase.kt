@@ -5,7 +5,7 @@ import com.example.searchworkapp.domain.repository.VacanciesRepository
 
 class VacanciesUseCase(private val repository: VacanciesRepository) {
 
-    suspend operator fun invoke(): List<VacancyUI> {
-        return repository.vacancies()
+    suspend operator fun invoke(search: String = ""): List<VacancyUI> {
+        return repository.vacancies(search)
     }
 }

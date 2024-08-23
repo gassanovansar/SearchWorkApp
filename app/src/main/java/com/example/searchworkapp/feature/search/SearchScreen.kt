@@ -8,13 +8,18 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
@@ -33,6 +38,12 @@ class SearchScreen : Screen {
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
         val bottomSheetNavigator = LocalBottomSheetNavigator.current
+        val viewModel = rememberScreenModel { SearchScreenModel() }
+        val state by viewModel.state.collectAsState()
+        LaunchedEffect(viewModel) {
+            viewModel.loadVacancies()
+        }
+
         PageContainer(
             header = {
                 Row(
@@ -40,7 +51,19 @@ class SearchScreen : Screen {
                         .padding(horizontal = 16.dp)
                         .padding(top = 16.dp, bottom = 8.dp)
                 ) {
-                    AppTextField(value = "", modifier = Modifier.weight(1f)) {}
+                    AppTextField(
+                        value = state.search,
+                        modifier = Modifier.weight(1f),
+                        hint = "Поиск",
+                        left = {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_search),
+                                contentDescription = ""
+                            )
+                        }
+                    ) {
+                        viewModel.changeSearch(it)
+                    }
                     AppCard(
                         backgroundColor = AppTheme.colors.gray2,
                         modifier = Modifier
@@ -64,7 +87,7 @@ class SearchScreen : Screen {
                     ) {
                         Text(
                             modifier = Modifier.weight(1f),
-                            text = "145 вакансий",
+                            text = "${state.vacancy.size} вакансий",
                             style = AppTheme.typography.regular.copy(
                                 fontSize = 14.sp,
                                 lineHeight = 16.8.sp,
@@ -99,12 +122,12 @@ class SearchScreen : Screen {
                         verticalArrangement = Arrangement.spacedBy(8.dp),
                         contentPadding = PaddingValues(16.dp)
                     ) {
-                        items(10) {
-//                            SearchItem(onClick = {
-//                                navigator.push(DetailScreen())
-//                            }, replyOnClick = {
-//                                bottomSheetNavigator.show(SendRequestBottomScreen())
-//                            })
+                        items(state.vacancy) {
+                            SearchItem(onClick = {
+                                navigator.push(DetailScreen(it.id))
+                            }, replyOnClick = {
+                                bottomSheetNavigator.show(SendRequestBottomScreen())
+                            }, item = it)
                         }
                     }
                 }

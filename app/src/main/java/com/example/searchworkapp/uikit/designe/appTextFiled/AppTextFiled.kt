@@ -88,7 +88,7 @@ internal fun AppTextField(
         backgroundColor = backgroundColor,
     ) {
 
-        Row(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
+        Row(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
             val keyboardController = LocalSoftwareKeyboardController.current
             left?.invoke()
             BasicTextField(

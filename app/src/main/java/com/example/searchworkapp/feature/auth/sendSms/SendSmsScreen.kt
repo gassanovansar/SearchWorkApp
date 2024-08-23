@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,9 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.searchworkapp.feature.auth.signIn.SignInScreenModel
 import com.example.searchworkapp.feature.tab.TabScreen
 import com.example.searchworkapp.uikit.designe.button.PrimaryButton
 import com.example.searchworkapp.uikit.designe.button.Size
@@ -28,11 +31,9 @@ import com.example.searchworkapp.uikit.theme.AppTheme
 class SendSmsScreen : Screen {
     @Composable
     override fun Content() {
-        val keyboardController = LocalSoftwareKeyboardController.current
         val navigator = LocalNavigator.currentOrThrow
-        var otp by remember {
-            mutableStateOf("")
-        }
+        val viewModel = rememberScreenModel { SendSmsScreenModel() }
+        val state by viewModel.state.collectAsState()
         PageContainer(content = {
             Column {
                 Spacer(modifier = Modifier.size(130.dp))
@@ -61,9 +62,9 @@ class SendSmsScreen : Screen {
                     modifier = Modifier
                         .padding(top = 16.dp)
                         .padding(horizontal = 16.dp),
-                    otpText = otp
-                ) { it, _ ->
-                    otp = it
+                    otpText = state.otp
+                ) { value, _ ->
+                    viewModel.changeOtp(value)
                 }
 
                 PrimaryButton(
@@ -72,10 +73,10 @@ class SendSmsScreen : Screen {
                         .padding(top = 16.dp)
                         .padding(horizontal = 16.dp),
                     size = Size.XXL,
+                    enabled = state.isValid,
                     text = "Продолжить",
                 ) {
                     navigator.push(TabScreen())
-
                 }
             }
         })

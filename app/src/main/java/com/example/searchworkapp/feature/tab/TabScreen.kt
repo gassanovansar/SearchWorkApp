@@ -26,12 +26,10 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import com.example.searchworkapp.base.ext.clickableRound
-import com.example.searchworkapp.data.sessionManager.SessionManager
-import com.example.searchworkapp.di.KoinInjector
-import com.example.searchworkapp.uikit.designe.appCard.AppCard
-import com.example.searchworkapp.uikit.screens.PageContainer
-import com.example.searchworkapp.uikit.theme.AppTheme
+import com.example.core.ext.clickableRound
+import com.example.uikit.designe.appCard.AppCard
+import com.example.uikit.screens.PageContainer
+import com.example.uikit.theme.AppTheme
 
 class TabScreen(private val tab: Tab = MainTabScreen) : Screen {
 

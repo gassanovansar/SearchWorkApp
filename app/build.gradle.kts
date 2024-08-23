@@ -63,7 +63,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
@@ -91,5 +90,15 @@ dependencies {
      */
     implementation(libs.kotlinx.serialization.json)
 
+
+    implementation(projects.core)
+    implementation(projects.uikit)
+    implementation(projects.models)
+    implementation(projects.features.main.ui)
+    implementation(projects.features.main.domain)
+    implementation(projects.features.detail.ui)
+    implementation(projects.features.search.ui)
+    implementation(projects.features.favourite.domain)
+    implementation(projects.features.detail.domain)
 
 }

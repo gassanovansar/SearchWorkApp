@@ -23,17 +23,17 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.searchworkapp.R
-import com.example.searchworkapp.base.ext.clickableRound
+import com.example.core.ext.clickableRound
 import com.example.searchworkapp.feature.auth.sendSms.SendSmsScreen
-import com.example.searchworkapp.uikit.designe.appCard.AppCard
-import com.example.searchworkapp.uikit.designe.appTextFiled.AppTextField
-import com.example.searchworkapp.uikit.designe.button.ButtonColor
-import com.example.searchworkapp.uikit.designe.button.PrimaryButton
-import com.example.searchworkapp.uikit.designe.button.Round
-import com.example.searchworkapp.uikit.designe.button.Size
-import com.example.searchworkapp.uikit.designe.toolBar.Toolbar
-import com.example.searchworkapp.uikit.screens.PageContainer
-import com.example.searchworkapp.uikit.theme.AppTheme
+import com.example.uikit.designe.appCard.AppCard
+import com.example.uikit.designe.appTextFiled.AppTextField
+import com.example.uikit.designe.button.ButtonColor
+import com.example.uikit.designe.button.PrimaryButton
+import com.example.uikit.designe.button.Round
+import com.example.uikit.designe.button.Size
+import com.example.uikit.designe.toolBar.Toolbar
+import com.example.uikit.screens.PageContainer
+import com.example.uikit.theme.AppTheme
 import kotlinx.coroutines.flow.collectLatest
 
 class SignInScreen : Screen {

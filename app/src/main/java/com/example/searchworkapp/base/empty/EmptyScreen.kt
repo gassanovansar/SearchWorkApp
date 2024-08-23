@@ -8,8 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
-import com.example.searchworkapp.uikit.screens.PageContainer
-import com.example.searchworkapp.uikit.theme.AppTheme
+import com.example.uikit.screens.PageContainer
+import com.example.uikit.theme.AppTheme
 
 class EmptyScreen : Screen {
     @Composable

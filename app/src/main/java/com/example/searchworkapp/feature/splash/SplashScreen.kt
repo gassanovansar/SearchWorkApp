@@ -12,9 +12,8 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.searchworkapp.feature.auth.signIn.SignInScreen
-import com.example.searchworkapp.feature.tab.TabScreen
-import com.example.searchworkapp.uikit.screens.PageContainer
-import com.example.searchworkapp.uikit.theme.AppTheme
+import com.example.uikit.screens.PageContainer
+import com.example.uikit.theme.AppTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

@@ -14,17 +14,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
-import com.example.searchworkapp.base.RootNavigator
-import com.example.searchworkapp.feature.tab.MainTabScreen
-import com.example.searchworkapp.feature.tab.TabScreen
-import com.example.searchworkapp.uikit.designe.button.PrimaryButton
-import com.example.searchworkapp.uikit.designe.button.Size
-import com.example.searchworkapp.uikit.designe.otpTextFiled.OtpTextField
-import com.example.searchworkapp.uikit.screens.PageContainer
-import com.example.searchworkapp.uikit.theme.AppTheme
+import com.example.uikit.designe.button.PrimaryButton
+import com.example.uikit.designe.button.Size
+import com.example.uikit.designe.otpTextFiled.OtpTextField
+import com.example.uikit.screens.PageContainer
+import com.example.uikit.theme.AppTheme
 
 class SendSmsScreen(private val email: String) : Screen {
     @Composable

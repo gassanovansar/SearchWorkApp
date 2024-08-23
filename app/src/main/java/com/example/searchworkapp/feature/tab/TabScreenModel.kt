@@ -2,7 +2,7 @@ package com.example.searchworkapp.feature.tab
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.example.searchworkapp.domain.useCase.favourite.FavouriteCountFlowUseCase
+import com.example.favourite.domain.FavouriteCountFlowUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

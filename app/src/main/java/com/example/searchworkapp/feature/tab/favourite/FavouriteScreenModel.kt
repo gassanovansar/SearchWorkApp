@@ -2,10 +2,10 @@ package com.example.searchworkapp.feature.tab.favourite
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.example.searchworkapp.domain.model.VacancyUI
-import com.example.searchworkapp.domain.useCase.favourite.AddFavouritesUseCase
-import com.example.searchworkapp.domain.useCase.favourite.DeleteFavouritesUseCase
-import com.example.searchworkapp.domain.useCase.favourite.FavouritesUseCase
+import com.example.models.VacancyUI
+import com.example.favourite.domain.AddFavouritesUseCase
+import com.example.favourite.domain.DeleteFavouritesUseCase
+import com.example.favourite.domain.FavouritesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

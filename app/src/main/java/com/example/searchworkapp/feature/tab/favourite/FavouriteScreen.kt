@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
@@ -17,13 +16,11 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.example.searchworkapp.R
-import com.example.searchworkapp.feature.detail.DetailScreen
-import com.example.searchworkapp.feature.sendRequest.SendRequestBottomScreen
-import com.example.searchworkapp.feature.tab.search.SearchItem
-import com.example.searchworkapp.uikit.designe.toolBar.Toolbar
-import com.example.searchworkapp.uikit.screens.PageContainer
-import com.example.searchworkapp.uikit.theme.AppTheme
+import com.example.detail.ui.details.DetailScreen
+import com.example.uikit.components.SearchItem
+import com.example.uikit.designe.toolBar.Toolbar
+import com.example.uikit.screens.PageContainer
+import com.example.uikit.theme.AppTheme
 
 class FavouriteScreen : Screen {
     @Composable

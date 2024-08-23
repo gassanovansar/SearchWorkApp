@@ -1,9 +1,9 @@
 package com.example.searchworkapp.data.repository
 
 import com.example.searchworkapp.data.source.LocalSource
-import com.example.searchworkapp.domain.mapper.toUI
-import com.example.searchworkapp.domain.model.VacancyUI
-import com.example.searchworkapp.domain.repository.FavouriteRepository
+import com.example.searchworkapp.data.mapper.toUI
+import com.example.models.VacancyUI
+import com.example.favourite.domain.FavouriteRepository
 import kotlinx.coroutines.flow.Flow
 
 class FavouriteRepositoryImpl(private val source: LocalSource) : FavouriteRepository {

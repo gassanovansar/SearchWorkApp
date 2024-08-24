@@ -55,7 +55,7 @@ class MainScreen : Screen {
             viewModel.loadVacancies()
         }
         PageContainer(
-            isLoading = viewModel.loading.collectAsState(false),
+            isLoading = viewModel.status.collectAsState(false),
             header = {
                 Row(
                     modifier = Modifier

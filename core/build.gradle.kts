@@ -60,4 +60,10 @@ dependencies {
     implementation(libs.voyager.bottomSheetNavigator)
     implementation(libs.voyager.tabNavigator)
     implementation(libs.voyager.screenModel)
+
+    /**
+     * Koin
+     */
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
 }

@@ -1,37 +1,24 @@
 package com.example.auth.ui.signIn
 
-import cafe.adriel.voyager.core.model.ScreenModel
-import cafe.adriel.voyager.core.model.screenModelScope
+import com.example.core.base.BaseScreenModel
 import com.example.core.ext.isEmail
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
 
-class SignInScreenModel : ScreenModel, KoinComponent {
-    private fun setEvent(newEvent: SignInEvent) {
-        screenModelScope.launch {
-            _event.send(newEvent)
+class SignInScreenModel : BaseScreenModel<SignInState, SignInEvent>(SignInState.Default) {
+
+
+    fun changeEmail(value: String) {
+        setState {
+            state.value.copy(email = value, isError = false)
         }
     }
 
-    private val _state = MutableStateFlow(SignInState.Default)
-    val state = _state.asStateFlow()
-
-    private val _event = Channel<SignInEvent>(Channel.BUFFERED)
-    val event = _event.receiveAsFlow()
-
-    fun changeEmail(value: String) {
-        _state.value = _state.value.copy(email = value, isError = false)
-    }
-
     fun signIn() {
-        if (_state.value.email.isEmail()) {
+        if (state.value.email.isEmail()) {
             setEvent(SignInEvent.Next)
         } else {
-            _state.value = _state.value.copy(isError = true)
+            setState {
+                state.value.copy(isError = true)
+            }
         }
     }
 }

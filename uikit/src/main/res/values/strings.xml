@@ -9,7 +9,7 @@
     <string name="search_for_employees">Поиск сотрудников</string>
     <string name="posting_vacancies_and_access_to_the_resume_database">Размещение вакансий и доступ к базе резюме</string>
     <string name="i_m_looking_for_employees">Я ищу сотрудников</string>
-    <string name="required_experience">Требуемый опыт: %!</string>
+    <string name="required_experience">Требуемый опыт: %s!</string>
     <string name="your_tasks">Ваши задачи</string>
     <string name="ask_the_employer_a_question">Задайте вопрос работодателю</string>
     <string name="he_will_receive_it_with_the_response_to_the_vacancy">Он получит его с откликом на вакансию</string>

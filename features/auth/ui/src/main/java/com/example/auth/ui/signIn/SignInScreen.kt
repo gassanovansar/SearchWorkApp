@@ -52,7 +52,9 @@ class SignInScreen : Screen {
                 }
             }
         }
-        PageContainer(header = {
+        PageContainer(
+            isLoading = viewModel.status.collectAsState(false),
+            header = {
             Toolbar(startTitle = stringResource(id = R.string.login_your_personal_account))
         }, content = {
             Column(modifier = Modifier.align(Alignment.Center)) {

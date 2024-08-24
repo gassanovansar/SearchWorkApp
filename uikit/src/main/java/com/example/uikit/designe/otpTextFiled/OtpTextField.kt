@@ -75,11 +75,7 @@ private fun CharView(
         index > text.length -> "*"
         else -> text[index].toString()
     }
-    val borderColor = when {
-        index == text.length -> AppTheme.colors.gray2
-        index > text.length -> AppTheme.colors.gray2
-        else -> AppTheme.colors.gray2
-    }
+
     val textColor = if (isError) AppTheme.colors.red else when {
         index == text.length -> if (char == "|") AppTheme.colors.gray3 else AppTheme.colors.white
         index > text.length -> AppTheme.colors.gray3

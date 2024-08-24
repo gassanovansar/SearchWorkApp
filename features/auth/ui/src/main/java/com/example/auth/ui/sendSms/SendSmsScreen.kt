@@ -27,7 +27,9 @@ class SendSmsScreen(private val email: String) : Screen {
     override fun Content() {
         val viewModel = rememberScreenModel { SendSmsScreenModel() }
         val state by viewModel.state.collectAsState()
-        PageContainer(content = {
+        PageContainer(
+            isLoading = viewModel.status.collectAsState(false),
+            content = {
             Column {
                 Spacer(modifier = Modifier.size(130.dp))
                 Text(

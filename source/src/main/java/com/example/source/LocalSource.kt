@@ -13,6 +13,7 @@ private enum class ChangeFavourites(val boolean: Boolean) {
 }
 
 class LocalSource(private val context: Context) {
+
     private val jsonSerializer = Json {
         ignoreUnknownKeys = true
         explicitNulls = false

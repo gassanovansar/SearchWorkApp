@@ -13,8 +13,8 @@ import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
 import com.example.core.RootNavigator
+import com.example.searchworkapp.feature.splash.SplashScreen
 import com.example.searchworkapp.feature.tab.TabScreen
-import com.example.splash.ui.SplashScreen
 import com.example.uikit.theme.AppTheme
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -32,14 +32,13 @@ internal fun App() {
                     topEndPercent = 8
                 )
             ) {
-                Navigator(TabScreen()) {
+                Navigator(SplashScreen()) {
                     CompositionLocalProvider(
                         RootNavigator provides it,
                     ) {
                         CurrentScreen()
                     }
                 }
-
             }
         }
     }

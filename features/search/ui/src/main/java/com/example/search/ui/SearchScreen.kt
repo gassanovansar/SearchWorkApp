@@ -45,6 +45,7 @@ class SearchScreen : Screen {
         }
 
         PageContainer(
+            isLoading = viewModel.status.collectAsState(false),
             header = {
                 Row(
                     modifier = Modifier

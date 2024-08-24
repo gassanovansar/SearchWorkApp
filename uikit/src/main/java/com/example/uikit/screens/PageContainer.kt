@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.State
@@ -55,48 +57,57 @@ fun PageContainer(
             localFocusManager.clearFocus(true)
         }
     }
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = {
-                    localFocusManager.clearFocus()
-                })
+    Box {
+
+
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .pointerInput(Unit) {
+                    detectTapGestures(onTap = {
+                        localFocusManager.clearFocus()
+                    })
+                }
+        ) {
+            if (!fill) {
+                Box(
+                    modifier = Modifier
+                        .padding(top = 24.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(AppTheme.colors.gray2)
+                        .width(38.dp)
+                        .height(5.dp)
+                        .align(Alignment.CenterHorizontally)
+                )
             }
-    ) {
-        if (!fill) {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                header?.invoke()
+            }
+
             Box(
                 modifier = Modifier
-                    .padding(top = 24.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(AppTheme.colors.gray2)
-                    .width(38.dp)
-                    .height(5.dp)
-                    .align(Alignment.CenterHorizontally)
+                    .weight(1f, fill)
+            ) {
+                content()
+//            ErrorMessageView(error = error)
+            }
+            Box(modifier = Modifier.fillMaxWidth()) {
+                footer?.invoke(this)
+            }
+
+
+        }
+        if (isLoading.value) {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .background(AppTheme.colors.shadows.copy(alpha = 0.5F))
+
+
             )
         }
-        Box(modifier = Modifier.fillMaxWidth()) {
-            header?.invoke()
-        }
-
-        Box(
-            modifier = Modifier
-                .weight(1f, fill)
-        ) {
-            content()
-//            ErrorMessageView(error = error)
-        }
-        Box(modifier = Modifier.fillMaxWidth()) {
-            footer?.invoke(this)
-        }
     }
 
 
-    if (isLoading.value) {
-//        LinearProgressIndicator(
-//            modifier = Modifier
-//                .background(Color.Black.copy(alpha = 0.5F))
-//        )
-    }
 }
 

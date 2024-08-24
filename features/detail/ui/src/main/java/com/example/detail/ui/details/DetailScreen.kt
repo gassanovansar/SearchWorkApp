@@ -47,6 +47,7 @@ class DetailScreen(val id: String) : Screen {
             viewModel.loadVacancy(id)
         }
         PageContainer(
+            isLoading = viewModel.status.collectAsState(false),
             header = {
                 Toolbar(leftIcon = { BackIcon() }, rightIcon = {
                     Row {

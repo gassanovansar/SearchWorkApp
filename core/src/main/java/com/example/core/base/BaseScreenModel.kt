@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.time.delay
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 
@@ -42,7 +43,7 @@ abstract class BaseScreenModel<State : Any, Event : Any>(initState: State) : Scr
 
     protected fun setStatus(status: Boolean) {
         screenModelScope.launch {
-            _status.emit(status)
+            _status.value = status
         }
     }
 

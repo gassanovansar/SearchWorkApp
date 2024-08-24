@@ -31,7 +31,9 @@ class FavouriteScreen : Screen {
         LaunchedEffect(viewModel) {
             viewModel.loadFavourites()
         }
-        PageContainer(header = {
+        PageContainer(
+            isLoading = viewModel.status.collectAsState(false),
+            header = {
             Toolbar(startTitle = "Избранное")
         }, content = {
             LazyColumn(

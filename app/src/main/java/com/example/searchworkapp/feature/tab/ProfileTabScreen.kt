@@ -6,13 +6,13 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.example.searchworkapp.R
 import com.example.searchworkapp.base.BaseAuthTab
-import com.example.searchworkapp.base.empty.EmptyScreen
+import com.example.uikit.screens.BaseEmptyScreen
 
 object ProfileTabScreen :BaseAuthTab {
 
     @Composable
     override fun AuthContent(){
-        Navigator(EmptyScreen())
+        Navigator(BaseEmptyScreen())
     }
 
 

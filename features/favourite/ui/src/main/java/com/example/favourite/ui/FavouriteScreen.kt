@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.detail.ui.details.DetailScreen
 import com.example.uikit.components.SearchItem
@@ -27,7 +26,6 @@ class FavouriteScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val bottomSheetNavigator = LocalBottomSheetNavigator.current
         val viewModel = rememberScreenModel { FavouriteScreenModel() }
         val state by viewModel.state.collectAsState()
         LaunchedEffect(viewModel) {

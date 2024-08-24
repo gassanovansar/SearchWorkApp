@@ -19,12 +19,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.core.ext.clickableRound
 import com.example.detail.ui.details.DetailScreen
@@ -38,7 +38,6 @@ class SearchScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val bottomSheetNavigator = LocalBottomSheetNavigator.current
         val viewModel = rememberScreenModel { SearchScreenModel() }
         val state by viewModel.state.collectAsState()
         LaunchedEffect(viewModel) {
@@ -55,7 +54,7 @@ class SearchScreen : Screen {
                     AppTextField(
                         value = state.search,
                         modifier = Modifier.weight(1f),
-                        hint = "Должность, ключевые слова",
+                        hint = stringResource(id = R.string.position_keywords),
                         left = {
                             Image(
                                 modifier = Modifier.clickableRound(4.dp) {
@@ -107,7 +106,7 @@ class SearchScreen : Screen {
                         Row {
                             Text(
                                 modifier = Modifier.align(Alignment.CenterVertically),
-                                text = "По соответствию",
+                                text = stringResource(id = R.string.by_compliance),
                                 style = AppTheme.typography.regular.copy(
                                     fontSize = 14.sp,
                                     lineHeight = 16.8.sp,
@@ -157,7 +156,7 @@ class SearchScreen : Screen {
                             modifier = Modifier
                                 .padding(start = 8.dp)
                                 .align(Alignment.CenterVertically),
-                            text = "Карта",
+                            text = stringResource(id = R.string.map),
                             style = AppTheme.typography.medium.copy(
                                 fontSize = 16.sp,
                                 lineHeight = 19.2.sp,
@@ -165,7 +164,6 @@ class SearchScreen : Screen {
                             )
                         )
                     }
-
                 }
             })
     }

@@ -108,6 +108,7 @@ dependencies {
     implementation(projects.features.favourite.domain)
     implementation(projects.features.favourite.data)
     implementation(projects.features.favourite.ui)
+    implementation(projects.features.splash.ui)
     implementation(projects.features.detail.domain)
     implementation(projects.source)
     implementation(projects.managers)

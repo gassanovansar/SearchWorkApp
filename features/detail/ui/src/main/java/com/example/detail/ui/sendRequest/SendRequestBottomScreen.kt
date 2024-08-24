@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -64,7 +65,7 @@ class SendRequestBottomScreen(private val question: String = "") : Screen {
                 AnimatedVisibility(visible = isVisible) {
                     DefaultTextFiled(
                         value = state.question,
-                        hint = "Ваше сопроводительное письмо",
+                        hint = stringResource(id = R.string.your_cover_letter),
                         modifier = Modifier.padding(top = 16.dp),
                         minLines = 4
                     ) {}
@@ -79,7 +80,7 @@ class SendRequestBottomScreen(private val question: String = "") : Screen {
                             .clickableRound(2.dp) {
                                 isVisible = true
                             },
-                        text = "Добавить сопроводительное",
+                        text = stringResource(id = R.string.add_accompanying_text),
                         style = AppTheme.typography.semiBold.copy(
                             fontSize = 16.sp,
                             lineHeight = 20.8.sp,
@@ -89,7 +90,7 @@ class SendRequestBottomScreen(private val question: String = "") : Screen {
                     )
                 }
                 PrimaryButton(
-                    text = "Откликнуться",
+                    text = stringResource(id = R.string.reply),
                     backgroundColor = ButtonColor.GREEN,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -118,7 +119,7 @@ class SendRequestBottomScreen(private val question: String = "") : Screen {
                     .align(Alignment.CenterVertically)
             ) {
                 Text(
-                    text = "Резюме для отклика",
+                    text = stringResource(id = R.string.resume_for_response),
                     style = AppTheme.typography.regular.copy(
                         fontSize = 14.sp,
                         lineHeight = 16.8.sp,

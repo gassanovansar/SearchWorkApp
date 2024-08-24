@@ -1,10 +1,10 @@
 package com.example.models.domain
 
-enum class Icon {
-    NearVacancies,
-    LevelUpResume,
-    TemporaryJob,
-    Empty
+enum class Icon(val id: String) {
+    NearVacancies("near_vacancies"),
+    LevelUpResume("level_up_resume"),
+    TemporaryJob("temporary_job"),
+    Empty("")
 }
 
 class OfferUI(

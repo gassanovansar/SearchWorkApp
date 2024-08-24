@@ -40,7 +40,7 @@ import com.example.uikit.theme.AppTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
- fun AppTextField(
+fun AppTextField(
     modifier: Modifier = Modifier,
     hint: String = "",
     backgroundColor: Color = AppTheme.colors.gray2,
@@ -68,18 +68,8 @@ import com.example.uikit.theme.AppTheme
     LaunchedEffect(value) {
         _value = value
     }
-//    if (fill) {
-//        modifier.fillMaxWidth()
-//    } else {
-//        modifier.padding(start = 8.dp)
-//    }
 
     var isFocused by remember { mutableStateOf(false) }
-    val borderColor = when {
-        error -> AppTheme.colors.red
-        isFocused -> AppTheme.colors.gray1
-        else -> AppTheme.colors.gray1
-    }
     Column(modifier = modifier) {
         Card(
             shape = shape,

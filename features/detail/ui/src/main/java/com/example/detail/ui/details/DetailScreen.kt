@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
@@ -27,6 +28,7 @@ import com.example.core.ext.clickableDebounce
 import com.example.core.ext.clickableRound
 import com.example.detail.ui.R
 import com.example.detail.ui.sendRequest.SendRequestBottomScreen
+import com.example.models.domain.VacancyAddressUI
 import com.example.uikit.designe.appCard.AppCard
 import com.example.uikit.designe.button.ButtonColor
 import com.example.uikit.designe.button.PrimaryButton
@@ -90,7 +92,10 @@ class DetailScreen(val id: String) : Screen {
                     )
                     Text(
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        text = "Требуемый опыт: ${state.vacancy.experience.previewText}",
+                        text = stringResource(
+                            id = R.string.required_experience,
+                            state.vacancy.experience.previewText
+                        ),
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -165,7 +170,7 @@ class DetailScreen(val id: String) : Screen {
 
                     Text(
                         modifier = Modifier.padding(horizontal = 16.dp),
-                        text = "Ваши задачи",
+                        text = stringResource(id = R.string.your_tasks),
                         style = AppTheme.typography.semiBold.copy(
                             fontSize = 20.sp,
                             lineHeight = 24.sp,
@@ -189,7 +194,7 @@ class DetailScreen(val id: String) : Screen {
                         modifier = Modifier
                             .padding(top = 32.dp)
                             .padding(horizontal = 16.dp),
-                        text = "Задайте вопрос работодателю",
+                        text = stringResource(id = R.string.ask_the_employer_a_question),
                         style = AppTheme.typography.medium.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -201,7 +206,7 @@ class DetailScreen(val id: String) : Screen {
                         modifier = Modifier
                             .padding(top = 8.dp)
                             .padding(horizontal = 16.dp),
-                        text = "Он получит его с откликом на вакансию",
+                        text = stringResource(id = R.string.he_will_receive_it_with_the_response_to_the_vacancy),
                         style = AppTheme.typography.medium.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,
@@ -222,7 +227,7 @@ class DetailScreen(val id: String) : Screen {
                         }
                     }
                     PrimaryButton(
-                        text = "Откликнуться",
+                        text = stringResource(id = R.string.reply),
                         backgroundColor = ButtonColor.GREEN,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -267,7 +272,7 @@ class DetailScreen(val id: String) : Screen {
     @Composable
     private fun MapItem(
         modifier: Modifier,
-        item: com.example.models.domain.VacancyAddressUI,
+        item: VacancyAddressUI,
         company: String
     ) {
         AppCard(modifier) {

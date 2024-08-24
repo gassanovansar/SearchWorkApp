@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.common"
+    namespace = "com.example.splash.ui"
     compileSdk = 34
 
     defaultConfig {
@@ -30,6 +30,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
 }
 
 dependencies {
@@ -37,8 +43,21 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material)
+
+    /**
+     * Voyager
+     */
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.bottomSheetNavigator)
+    implementation(libs.voyager.tabNavigator)
+    implementation(libs.voyager.screenModel)
+
+    implementation(projects.features.auth.ui)
+    implementation(projects.uikit)
 }

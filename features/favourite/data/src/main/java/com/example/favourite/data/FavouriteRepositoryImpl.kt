@@ -14,7 +14,7 @@ class FavouriteRepositoryImpl(private val source: LocalSource) : FavouriteReposi
         return source.loadFavourites().map { it.toUI() }
     }
 
-    override suspend fun addFavourites(id:String) {
+    override suspend fun addFavourites(id: String) {
         source.addFavourites(id)
     }
 

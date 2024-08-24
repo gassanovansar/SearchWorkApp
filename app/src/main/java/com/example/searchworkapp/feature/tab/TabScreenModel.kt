@@ -23,7 +23,7 @@ class TabScreenModel : ScreenModel, KoinComponent {
         screenModelScope.launch {
             sessionManager.isAuth.collect {
                 if (it) {
-                    favouriteCountFlowUseCase.favouriteCountFlow.collect {
+                    favouriteCountFlowUseCase().collect {
                         _state.value = it
                     }
                 }

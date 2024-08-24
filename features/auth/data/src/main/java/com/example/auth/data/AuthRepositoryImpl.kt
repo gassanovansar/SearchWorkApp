@@ -5,6 +5,6 @@ import com.example.managers.SessionManager
 
 class AuthRepositoryImpl(private val sessionManager: SessionManager) : AuthRepository {
     override suspend fun auth() {
-        sessionManager.isAuth.value = true
+        sessionManager.setAuth()
     }
 }

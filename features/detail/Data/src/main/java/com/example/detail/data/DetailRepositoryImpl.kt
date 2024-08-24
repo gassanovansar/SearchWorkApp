@@ -6,7 +6,6 @@ import com.example.models.mappers.toUI
 import com.example.source.LocalSource
 
 class DetailRepositoryImpl(private val source: LocalSource) : DetailRepository {
-    override suspend fun vacancy(id: String): VacancyUI {
-        return source.loadVacancy(id)?.toUI() ?: VacancyUI.Default
-    }
+
+    override suspend fun vacancy(id: String) = source.loadVacancy(id)?.toUI() ?: VacancyUI.Default
 }

@@ -33,7 +33,6 @@ import androidx.compose.ui.unit.sp
 import com.example.core.ext.clickableRound
 import com.example.uikit.theme.AppTheme
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun DefaultTextFiled(
     modifier: Modifier = Modifier,

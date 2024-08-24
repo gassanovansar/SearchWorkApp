@@ -24,7 +24,7 @@ import com.example.uikit.designe.appCard.AppCard
 import com.example.uikit.theme.AppTheme
 
 @Composable
- fun OtpTextField(
+fun OtpTextField(
     modifier: Modifier = Modifier,
     otpText: String,
     otpCount: Int = 4,
@@ -84,11 +84,6 @@ private fun CharView(
         index == text.length -> if (char == "|") AppTheme.colors.gray3 else AppTheme.colors.white
         index > text.length -> AppTheme.colors.gray3
         else -> AppTheme.colors.white
-    }
-    val color = if (isError) {
-        AppTheme.colors.red
-    } else {
-        borderColor
     }
 
     AppCard(

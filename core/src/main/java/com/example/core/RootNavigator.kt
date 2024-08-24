@@ -1,4 +1,4 @@
-package com.example.searchworkapp.base
+package com.example.core
 
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf

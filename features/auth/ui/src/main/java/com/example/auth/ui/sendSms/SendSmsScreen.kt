@@ -30,6 +30,7 @@ class SendSmsScreen(private val email: String) : Screen {
                 Spacer(modifier = Modifier.size(130.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 16.dp),
+                    //TODO FIX STRING
                     text = "Отправили код на $email",
                     style = AppTheme.typography.semiBold.copy(
                         fontSize = 20.sp,

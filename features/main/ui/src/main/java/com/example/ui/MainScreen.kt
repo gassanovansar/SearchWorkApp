@@ -22,13 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.bottomSheet.LocalBottomSheetNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.core.ext.clickableRound
 import com.example.detail.ui.details.DetailScreen
@@ -47,7 +47,6 @@ class MainScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val bottomSheetNavigator = LocalBottomSheetNavigator.current
         val viewModel = rememberScreenModel { MainScreenModel() }
         val state by viewModel.state.collectAsState()
         LaunchedEffect(viewModel) {
@@ -66,7 +65,7 @@ class MainScreen : Screen {
                         value = "",
                         modifier = Modifier.weight(1f),
                         enabled = false,
-                        hint = "Должность, ключевые слова",
+                        hint = stringResource(id = R.string.position_keywords),
                         left = {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_search),
@@ -107,7 +106,7 @@ class MainScreen : Screen {
                     item {
                         Text(
                             modifier = Modifier.padding(top = 24.dp, start = 16.dp),
-                            text = "Вакансии для вас",
+                            text = stringResource(id = R.string.jobs_for_you),
                             style = AppTheme.typography.semiBold.copy(
                                 fontSize = 20.sp,
                                 lineHeight = 24.sp,
@@ -132,7 +131,11 @@ class MainScreen : Screen {
                         Spacer(modifier = Modifier.size(16.dp))
                         if (state.vacancy.size > 3) {
                             PrimaryButton(
-                                text =pluralStringResource(id = R.plurals.vacancy, state.vacancy.size - 3,state.vacancy.size - 3),
+                                text = pluralStringResource(
+                                    id = R.plurals.vacancy,
+                                    state.vacancy.size - 3,
+                                    state.vacancy.size - 3
+                                ),
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(top = 8.dp, bottom = 8.dp)
@@ -161,10 +164,10 @@ class MainScreen : Screen {
                     modifier = Modifier,
                     painter = painterResource(
                         id = when (item.icon) {
-                            com.example.models.domain.Icon.NearVacancies -> R.drawable.ic_near_vacancies
-                            com.example.models.domain.Icon.LevelUpResume -> R.drawable.ic_level_up_resume
-                            com.example.models.domain.Icon.TemporaryJob -> R.drawable.ic_temporary_job
-                            com.example.models.domain.Icon.Empty -> R.drawable.ic_empty
+                            Icon.NearVacancies -> R.drawable.ic_near_vacancies
+                            Icon.LevelUpResume -> R.drawable.ic_level_up_resume
+                            Icon.TemporaryJob -> R.drawable.ic_temporary_job
+                            Icon.Empty -> R.drawable.ic_empty
                         }
                     ), contentDescription = ""
                 )
@@ -189,10 +192,7 @@ class MainScreen : Screen {
                         )
                     )
                 }
-
-
             }
-
         }
     }
 }

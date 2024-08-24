@@ -52,4 +52,12 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material)
+
+    /**
+     * Voyager
+     */
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.bottomSheetNavigator)
+    implementation(libs.voyager.tabNavigator)
+    implementation(libs.voyager.screenModel)
 }

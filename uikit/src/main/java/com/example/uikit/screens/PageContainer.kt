@@ -32,7 +32,6 @@ fun PageContainer(
     background: Color = AppTheme.colors.shadows,
     brush: Brush? = null,
     fill: Boolean = true,
-    line: Boolean = true,
     isLoading: State<Boolean> = mutableStateOf(false),
     header: @Composable (() -> Unit)? = null,
     content: @Composable BoxScope.() -> Unit,
@@ -46,7 +45,6 @@ fun PageContainer(
     modifier = if (fill) {
         modifier
             .fillMaxHeight()
-//            .windowInsetsPadding(WindowInsets.safeDrawing)
     } else {
         modifier.padding(bottom = 12.dp)
     }

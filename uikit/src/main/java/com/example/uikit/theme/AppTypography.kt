@@ -20,7 +20,6 @@ object AppFonts {
     val regular: BaseTypography = TextStyleRegular(FontFamily(Font(R.font.regular)))
     val medium: BaseTypography = TextStyleMedium(FontFamily(Font(R.font.medium)))
     val semiBold: BaseTypography = TextStyleSemiBold(FontFamily(Font(R.font.semibold)))
-//    actual val bold: BaseTypography = TextStyleBold(FontFamily(Font(R.font.ubuntu_700)))
 }
 
 
@@ -28,7 +27,6 @@ class AppTypography(
     val regular: TextStyle,
     val medium: TextStyle,
     val semiBold: TextStyle,
-//    val bold: TextStyle,
 )
 
 
@@ -38,7 +36,6 @@ fun textStyles(): AppTypography {
         regular = AppFonts.regular.getComposeTextStyle(),
         medium = AppFonts.medium.getComposeTextStyle(),
         semiBold = AppFonts.semiBold.getComposeTextStyle(),
-//        bold = AppFonts.bold.getComposeTextStyle(),
     )
 }
 

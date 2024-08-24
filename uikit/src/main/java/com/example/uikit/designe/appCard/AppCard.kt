@@ -29,7 +29,7 @@ fun AppCard(
         border = border,
         elevation = elevation
     ) {
-        Box() {
+        Box {
             content()
         }
 

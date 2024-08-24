@@ -9,7 +9,8 @@ object KoinInjector {
             listOf(
                 useCaseModule,
                 repositoryModule,
-                sourceModule
+                sourceModule,
+                managerModule
             )
         )
     }

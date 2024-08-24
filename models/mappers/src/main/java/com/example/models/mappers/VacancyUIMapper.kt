@@ -8,6 +8,8 @@ import com.example.models.domain.VacancyAddressUI
 import com.example.models.domain.VacancyExperienceUI
 import com.example.models.domain.VacancySalaryUI
 import com.example.models.domain.VacancyUI
+import com.example.models.mappers.ext.toDateDayMonth
+import java.text.SimpleDateFormat
 
 fun VacanciesResponse.toUI(): VacancyUI {
     return VacancyUI(
@@ -17,7 +19,7 @@ fun VacanciesResponse.toUI(): VacancyUI {
         address = this.address?.toUI() ?: VacancyAddressUI.Default,
         company = this.company.orEmpty(),
         experience = this.experience?.toUI() ?: VacancyExperienceUI.Default,
-        publishedDate = this.publishedDate.orEmpty(),
+        publishedDate = this.publishedDate.orEmpty().toDateDayMonth(),
         isFavorite = this.isFavorite ?: false,
         salary = this.salary?.toUI() ?: VacancySalaryUI.Default,
         schedules = this.schedules.orEmpty(),

@@ -10,10 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
+import com.example.auth.ui.R
 import com.example.uikit.designe.button.PrimaryButton
 import com.example.uikit.designe.button.Size
 import com.example.uikit.designe.otpTextFiled.OtpTextField
@@ -30,8 +32,7 @@ class SendSmsScreen(private val email: String) : Screen {
                 Spacer(modifier = Modifier.size(130.dp))
                 Text(
                     modifier = Modifier.padding(horizontal = 16.dp),
-                    //TODO FIX STRING
-                    text = "Отправили код на $email",
+                    text = stringResource(id = R.string.sent_the_code_to, email),
                     style = AppTheme.typography.semiBold.copy(
                         fontSize = 20.sp,
                         lineHeight = 24.sp,
@@ -42,7 +43,7 @@ class SendSmsScreen(private val email: String) : Screen {
                     modifier = Modifier
                         .padding(top = 16.dp)
                         .padding(horizontal = 16.dp),
-                    text = "Напишите его, чтобы подтвердить, что это вы, а не кто-то другой входит в личный кабинет",
+                    text = stringResource(id = R.string.sent_the_code_to_description),
                     style = AppTheme.typography.medium.copy(
                         fontSize = 16.sp,
                         lineHeight = 19.2.sp,
@@ -66,7 +67,7 @@ class SendSmsScreen(private val email: String) : Screen {
                         .padding(horizontal = 16.dp),
                     size = Size.XXL,
                     enabled = state.isValid,
-                    text = "Продолжить",
+                    text = stringResource(id = R.string.continue_),
                 ) {
                     viewModel.changeIsAuth()
                 }

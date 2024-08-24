@@ -32,6 +32,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.core.ext.clickableRound
 import com.example.detail.ui.details.DetailScreen
+import com.example.main.ui.R
 import com.example.models.domain.Icon
 import com.example.models.domain.OfferUI
 import com.example.search.ui.SearchScreen

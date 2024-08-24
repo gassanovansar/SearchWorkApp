@@ -44,7 +44,11 @@ fun SearchItem(
                     if (item.lookingNumber != 0) {
                         Text(
                             modifier = Modifier.padding(bottom = 10.dp),
-                            text = pluralStringResource(id = R.plurals.human, item.lookingNumber,item.lookingNumber),
+                            text = pluralStringResource(
+                                id = R.plurals.human,
+                                item.lookingNumber,
+                                item.lookingNumber
+                            ),
                             style = AppTheme.typography.regular.copy(
                                 fontSize = 14.sp,
                                 lineHeight = 16.8.sp,
@@ -112,7 +116,7 @@ fun SearchItem(
                     //TODO FIX
                     Text(
                         modifier = Modifier.padding(top = 10.dp),
-                        text = "Опубликовано 20 февраля",
+                        text = stringResource(id = R.string.published, item.publishedDate),
                         style = AppTheme.typography.regular.copy(
                             fontSize = 14.sp,
                             lineHeight = 16.8.sp,

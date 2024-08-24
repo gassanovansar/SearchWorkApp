@@ -13,6 +13,7 @@ import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
 import com.example.core.RootNavigator
+import com.example.searchworkapp.feature.tab.TabScreen
 import com.example.splash.ui.SplashScreen
 import com.example.uikit.theme.AppTheme
 
@@ -31,7 +32,7 @@ internal fun App() {
                     topEndPercent = 8
                 )
             ) {
-                Navigator(SplashScreen()) {
+                Navigator(TabScreen()) {
                     CompositionLocalProvider(
                         RootNavigator provides it,
                     ) {

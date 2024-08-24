@@ -22,6 +22,9 @@
     <string name="by_compliance">По соответствию</string>
     <string name="map">Карта</string>
     <string name="not_implemented">Не реализовано</string>
+    <string name="sent_the_code_to">Отправили код на %s!</string>
+    <string name="published">Опубликовано %s!</string>
+    <string name="sent_the_code_to_description">Напишите его, чтобы подтвердить, что это вы, а не кто-то другой входит в личный кабинет</string>
 
 
     <plurals name="vacancy">

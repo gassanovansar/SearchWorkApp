@@ -12,7 +12,7 @@ class DetailScreenModel : BaseScreenModel<DetailState, Any>(DetailState.Default)
     private val deleteFavouritesUseCase: DeleteFavouritesUseCase by inject()
     fun loadVacancy(id: String) {
         launchOperation(operation = {
-            vacancyUseCase(id)
+            vacancyUseCase(VacancyUseCase.Params(id))
         }, success = {
             setState { state.value.copy(vacancy = it) }
         })
@@ -20,8 +20,12 @@ class DetailScreenModel : BaseScreenModel<DetailState, Any>(DetailState.Default)
 
     fun isFavourites() {
         launchOperation(operation = {
-            if (state.value.vacancy.isFavorite) deleteFavouritesUseCase(state.value.vacancy.id)
-            else addFavouritesUseCase(state.value.vacancy.id)
+            if (state.value.vacancy.isFavorite) deleteFavouritesUseCase(
+                DeleteFavouritesUseCase.Params(
+                    state.value.vacancy.id
+                )
+            )
+            else addFavouritesUseCase(AddFavouritesUseCase.Params(state.value.vacancy.id))
         }, success = {
             setState {
                 state.value.copy(

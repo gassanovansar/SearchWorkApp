@@ -16,7 +16,7 @@ class MainScreenModel : BaseScreenModel<MainState, Any>(MainState.Default) {
     private val deleteFavouritesUseCase: DeleteFavouritesUseCase by inject()
     fun loadOffers() {
         launchOperation(operation = {
-            offersUseCase()
+            offersUseCase(OffersUseCase.Params())
         }, success = {
             setState { state.value.copy(offers = it) }
         })
@@ -24,7 +24,7 @@ class MainScreenModel : BaseScreenModel<MainState, Any>(MainState.Default) {
 
     fun loadVacancies() {
         launchOperation(operation = {
-            vacanciesUseCase()
+            vacanciesUseCase(VacanciesUseCase.Params())
         }, success = {
             setState { state.value.copy(vacancy = it) }
         })
@@ -32,8 +32,8 @@ class MainScreenModel : BaseScreenModel<MainState, Any>(MainState.Default) {
 
     fun isFavourites(item: VacancyUI) {
         launchOperation(operation = {
-            if (item.isFavorite) deleteFavouritesUseCase(item.id)
-            else addFavouritesUseCase(item.id)
+            if (item.isFavorite) deleteFavouritesUseCase(DeleteFavouritesUseCase.Params(item.id))
+            else addFavouritesUseCase(AddFavouritesUseCase.Params(item.id))
         }, success = {
             setState {
                 state.value.copy(vacancy = state.value.vacancy.map {

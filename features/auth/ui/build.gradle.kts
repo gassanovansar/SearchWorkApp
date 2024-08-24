@@ -69,6 +69,7 @@ dependencies {
      * Modules
      */
     implementation(projects.core)
+    implementation(projects.corekt)
     implementation(projects.uikit)
     implementation(projects.models.domain)
     implementation(projects.features.auth.domain)

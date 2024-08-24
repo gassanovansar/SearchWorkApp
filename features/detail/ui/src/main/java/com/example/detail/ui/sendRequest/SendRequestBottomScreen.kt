@@ -128,7 +128,7 @@ class SendRequestBottomScreen(private val question: String = "") : Screen {
                 )
                 Text(
                     modifier = Modifier.padding(top = 8.dp),
-                    text = "UI/UX дизайнер ",
+                    text = stringResource(id = R.string.hard_profile_name),
                     style = AppTheme.typography.medium.copy(
                         fontSize = 16.sp,
                         lineHeight = 19.2.sp,

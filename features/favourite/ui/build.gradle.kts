@@ -73,4 +73,6 @@ dependencies {
     implementation(projects.uikit)
     implementation(projects.features.detail.ui)
     implementation(projects.features.favourite.domain)
+    implementation(projects.corekt)
+
 }

@@ -15,7 +15,7 @@ class FavouriteScreenModel : BaseScreenModel<FavouriteState, Any>(FavouriteState
 
     fun loadFavourites() {
         launchOperation(operation = {
-            favouritesUseCase()
+            favouritesUseCase(FavouritesUseCase.Params())
         }, success = {
             setState { state.value.copy(favourites = it) }
         })
@@ -23,8 +23,8 @@ class FavouriteScreenModel : BaseScreenModel<FavouriteState, Any>(FavouriteState
 
     fun isFavourites(item: VacancyUI) {
         launchOperation(operation = {
-            if (item.isFavorite) deleteFavouritesUseCase(item.id)
-            else addFavouritesUseCase(item.id)
+            if (item.isFavorite) deleteFavouritesUseCase(DeleteFavouritesUseCase.Params(item.id))
+            else addFavouritesUseCase(AddFavouritesUseCase.Params(item.id))
         }, success = {
             setState {
                 state.value.copy(favourites = state.value.favourites.map {

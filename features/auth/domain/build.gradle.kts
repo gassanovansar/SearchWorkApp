@@ -9,5 +9,5 @@ java {
 }
 dependencies {
     //TODO FIX
-//    implementation(projects.managers)
+    implementation(projects.corekt)
 }

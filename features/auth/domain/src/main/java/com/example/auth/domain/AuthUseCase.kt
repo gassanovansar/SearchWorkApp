@@ -1,7 +1,11 @@
 package com.example.auth.domain
 
-class AuthUseCase(private val authRepository: AuthRepository) {
-    suspend operator fun invoke() {
-        authRepository.auth()
+import com.example.corekt.BaseUseCase
+
+class AuthUseCase(private val authRepository: AuthRepository) : BaseUseCase<AuthUseCase.Params, Unit>() {
+    class Params()
+
+    override suspend fun execute(params: Params) {
+        return authRepository.auth()
     }
 }

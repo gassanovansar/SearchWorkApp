@@ -1,11 +1,15 @@
 package com.example.detail.domain
 
+import com.example.corekt.BaseUseCase
 import com.example.models.domain.VacancyUI
 
 
-class VacancyUseCase(private val repository: DetailRepository) {
+class VacancyUseCase(private val repository: DetailRepository) :
+    BaseUseCase<VacancyUseCase.Params, VacancyUI>() {
 
-    suspend operator fun invoke(id: String): VacancyUI {
-        return repository.vacancy(id)
+    class Params(val id: String)
+
+    override suspend fun execute(params: Params): VacancyUI {
+        return repository.vacancy(params.id)
     }
 }

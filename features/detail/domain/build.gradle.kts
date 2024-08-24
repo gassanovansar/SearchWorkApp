@@ -9,4 +9,5 @@ java {
 }
 dependencies {
     implementation(projects.models.domain)
+    implementation(projects.corekt)
 }

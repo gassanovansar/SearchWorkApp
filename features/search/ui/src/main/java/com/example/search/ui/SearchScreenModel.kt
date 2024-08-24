@@ -16,7 +16,7 @@ class SearchScreenModel : BaseScreenModel<SearchState, Any>(SearchState.Default)
     private val deleteFavouritesUseCase: DeleteFavouritesUseCase by inject()
     fun loadVacancies(search: String = "") {
         launchOperation(operation = {
-            vacanciesUseCase(search)
+            vacanciesUseCase(VacanciesUseCase.Params(search))
         }, success = { setState { state.value.copy(vacancy = it) } }
         )
     }
@@ -33,8 +33,8 @@ class SearchScreenModel : BaseScreenModel<SearchState, Any>(SearchState.Default)
 
     fun isFavourites(item: VacancyUI) {
         launchOperation(operation = {
-            if (item.isFavorite) deleteFavouritesUseCase(item.id)
-            else addFavouritesUseCase(item.id)
+            if (item.isFavorite) deleteFavouritesUseCase(DeleteFavouritesUseCase.Params(item.id))
+            else addFavouritesUseCase(AddFavouritesUseCase.Params(item.id))
         }, success = {
             setState {
                 state.value.copy(vacancy = state.value.vacancy.map {

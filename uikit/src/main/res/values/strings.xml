@@ -36,6 +36,7 @@
     <plurals name="vacancy_1">
         <item quantity="zero">%d вакансий</item>
         <item quantity="one">%d вакансия</item>
+        <item quantity="two">%d вакансии</item>
         <item quantity="other">%d вакансий</item>
     </plurals>
     <plurals name="human">

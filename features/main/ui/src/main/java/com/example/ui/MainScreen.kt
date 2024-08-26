@@ -31,6 +31,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.core.RootNavigator
 import com.example.core.ext.clickableRound
 import com.example.detail.ui.details.DetailScreen
 import com.example.main.ui.R
@@ -49,6 +50,7 @@ class MainScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
+        val rootNavigator = RootNavigator.currentOrThrow
         val viewModel = rememberScreenModel { MainScreenModel() }
         val state by viewModel.state.collectAsState()
         LaunchedEffect(viewModel) {
@@ -122,7 +124,7 @@ class MainScreen : Screen {
                             modifier = Modifier.padding(horizontal = 16.dp),
                             item = it,
                             onClick = {
-                                navigator.push(DetailScreen(it.id))
+                                rootNavigator.push(DetailScreen(it.id))
                             },
                             isFavouriteOnClick = {
                                 viewModel.isFavourites(it)

@@ -48,6 +48,7 @@ fun OtpTextField(
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
         cursorBrush = SolidColor(AppTheme.colors.gray5),
         singleLine = true,
+        maxLines = 1,
         decorationBox = {
             Row(horizontalArrangement = Arrangement.Center) {
                 repeat(otpCount) { index ->

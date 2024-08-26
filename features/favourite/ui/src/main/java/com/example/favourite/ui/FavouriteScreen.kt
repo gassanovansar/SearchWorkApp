@@ -16,6 +16,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.core.RootNavigator
 import com.example.detail.ui.details.DetailScreen
 import com.example.uikit.components.SearchItem
 import com.example.uikit.designe.toolBar.Toolbar
@@ -25,7 +26,7 @@ import com.example.uikit.theme.AppTheme
 class FavouriteScreen : Screen {
     @Composable
     override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
+        val rootNavigator = RootNavigator.currentOrThrow
         val viewModel = rememberScreenModel { FavouriteScreenModel() }
         val state by viewModel.state.collectAsState()
         LaunchedEffect(viewModel) {
@@ -53,7 +54,7 @@ class FavouriteScreen : Screen {
                 }
                 items(state.favourites) {
                     SearchItem(item = it, onClick = {
-                        navigator.push(DetailScreen(it.id))
+                        rootNavigator.push(DetailScreen(it.id))
                     }, isFavouriteOnClick = {
                         viewModel.isFavourites(it)
                     })

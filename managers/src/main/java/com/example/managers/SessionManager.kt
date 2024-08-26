@@ -13,7 +13,7 @@ interface SessionManager {
 
 class SessionManagerImpl : SessionManager {
 
-    override val isAuth: MutableStateFlow<Boolean> = MutableStateFlow(true)
+    override val isAuth: MutableStateFlow<Boolean> = MutableStateFlow(false)
 
     override fun setAuth() {
         isAuth.value = true

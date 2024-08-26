@@ -31,17 +31,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget ="17"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
@@ -60,13 +60,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+
     /**
      * Voyager
      */
@@ -90,5 +84,27 @@ dependencies {
      * Serialization
      */
     implementation(libs.kotlinx.serialization.json)
+
+
+    implementation(projects.core)
+    implementation(projects.uikit)
+    implementation(projects.models.domain)
+    implementation(projects.models.data)
+    implementation(projects.models.mappers)
+    implementation(projects.features.main.ui)
+    implementation(projects.features.auth.ui)
+    implementation(projects.features.auth.domain)
+    implementation(projects.features.auth.data)
+    implementation(projects.features.main.domain)
+    implementation(projects.features.main.data)
+    implementation(projects.features.detail.ui)
+    implementation(projects.features.detail.data)
+    implementation(projects.features.search.ui)
+    implementation(projects.features.favourite.domain)
+    implementation(projects.features.favourite.data)
+    implementation(projects.features.favourite.ui)
+    implementation(projects.features.detail.domain)
+    implementation(projects.source)
+    implementation(projects.managers)
 
 }

@@ -2,22 +2,17 @@ package com.example.searchworkapp.feature.tab
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.example.searchworkapp.R
 import com.example.searchworkapp.base.BaseAuthTab
-import com.example.searchworkapp.base.empty.EmptyScreen
-import com.example.searchworkapp.feature.tab.favourite.FavouriteScreen
-import com.example.searchworkapp.feature.tab.search.MainScreen
+import com.example.uikit.screens.BaseEmptyScreen
 
 object MessagesTabScreen : BaseAuthTab {
 
     @Composable
     override fun AuthContent() {
-        Navigator(EmptyScreen())
+        Navigator(BaseEmptyScreen())
     }
 
 

@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">SearchWorkApp</string>
+    <string name="login_your_personal_account">Вход в личный кабинет</string>
+
+    <string name="job_search">Поиск работы</string>
+    <string name="email">Электронная почта</string>
+    <string name="continue_">Продолжить</string>
+    <string name="login_with_password">Войти с паролем</string>
+    <string name="search_for_employees">Поиск сотрудников</string>
+    <string name="posting_vacancies_and_access_to_the_resume_database">Размещение вакансий и доступ к базе резюме</string>
+    <string name="i_m_looking_for_employees">Я ищу сотрудников</string>
+    <string name="required_experience">Требуемый опыт: %s!</string>
+    <string name="your_tasks">Ваши задачи</string>
+    <string name="ask_the_employer_a_question">Задайте вопрос работодателю</string>
+    <string name="he_will_receive_it_with_the_response_to_the_vacancy">Он получит его с откликом на вакансию</string>
+    <string name="reply">Откликнуться</string>
+    <string name="your_cover_letter">Ваше сопроводительное письмо</string>
+    <string name="add_accompanying_text">Добавить сопроводительное</string>
+    <string name="resume_for_response">Резюме для отклика</string>
+    <string name="position_keywords">Должность, ключевые слова</string>
+    <string name="jobs_for_you">Вакансии для вас</string>
+    <string name="by_compliance">По соответствию</string>
+    <string name="map">Карта</string>
+    <string name="not_implemented">Не реализовано</string>
+    <string name="sent_the_code_to">Отправили код на %s!</string>
+    <string name="published">Опубликовано %s!</string>
+    <string name="sent_the_code_to_description">Напишите его, чтобы подтвердить, что это вы, а не кто-то другой входит в личный кабинет</string>
+    <string name="hard_profile_name">UI/UX дизайнер</string>
+
+
+    <plurals name="vacancy">
+        <item quantity="zero">Еще %d вакансий</item>
+        <item quantity="one">Еще %d вакансия</item>
+        <item quantity="other">Еще %d вакансии</item>
+    </plurals>
+    <plurals name="vacancy_1">
+        <item quantity="zero">%d вакансий</item>
+        <item quantity="one">%d вакансия</item>
+        <item quantity="two">%d вакансии</item>
+        <item quantity="other">%d вакансий</item>
+    </plurals>
+    <plurals name="human">
+        <item quantity="zero">Сейчас просматривает %d человек</item>
+        <item quantity="one">Сейчас просматривает %d человек</item>
+        <item quantity="two">Сейчас просматривает %d человека</item>
+        <item quantity="few">Сейчас просматривает %d человека</item>
+        <item quantity="other">Сейчас просматривает %d человек</item>
+    </plurals>
+    <plurals name="human_1">
+        <item quantity="zero">%d человек уже откликнулись</item>
+        <item quantity="one">%d человек уже откликнулись</item>
+        <item quantity="two">%d человека уже откликнулись</item>
+        <item quantity="other">%d человек уже откликнулись</item>
+    </plurals>
+    <plurals name="human_2">
+        <item quantity="zero">%d человек сейчас смотрят</item>
+        <item quantity="one">%d человек сейчас смотрят</item>
+        <item quantity="two">%d человека сейчас смотрят</item>
+        <item quantity="other">%d человека сейчас смотрят</item>
+    </plurals>
+</resources>

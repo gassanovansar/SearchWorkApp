@@ -7,7 +7,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.example.searchworkapp.R
 import com.example.searchworkapp.base.BaseAuthTab
-import com.example.searchworkapp.feature.tab.favourite.FavouriteScreen
+import com.example.favourite.ui.FavouriteScreen
 
 object FavouriteTabScreen : BaseAuthTab {
     override val key: ScreenKey = "FavouriteTabScreen"

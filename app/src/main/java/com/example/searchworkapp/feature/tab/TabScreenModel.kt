@@ -1,28 +1,26 @@
 package com.example.searchworkapp.feature.tab
 
-import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.example.searchworkapp.domain.useCase.favourite.FavouriteCountFlowUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.example.core.base.BaseScreenModel
+import com.example.favourite.domain.FavouriteCountFlowUseCase
+import com.example.managers.SessionManager
 import kotlinx.coroutines.launch
-import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class TabScreenModel : ScreenModel, KoinComponent {
-    private val favouriteCountFlowUseCase: FavouriteCountFlowUseCase by inject()
+class TabScreenModel : BaseScreenModel<Int, Any>(0) {
 
-    private val _state = MutableStateFlow(0)
-    val state = _state.asStateFlow()
+    private val favouriteCountFlowUseCase: FavouriteCountFlowUseCase by inject()
+    private val sessionManager: SessionManager by inject()
 
     fun favouriteCount() {
         screenModelScope.launch {
-            favouriteCountFlowUseCase.favouriteCountFlow.collect {
-                _state.value = it
+            sessionManager.isAuth.collect {
+                if (it) {
+                    favouriteCountFlowUseCase().collect {
+                        setState { it }
+                    }
+                }
             }
         }
-
     }
-
-
 }

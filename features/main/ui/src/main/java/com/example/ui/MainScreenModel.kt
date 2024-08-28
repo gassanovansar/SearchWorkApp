@@ -15,25 +15,28 @@ class MainScreenModel : BaseScreenModel<MainState, Any>(MainState.Default) {
     private val addFavouritesUseCase: AddFavouritesUseCase by inject()
     private val deleteFavouritesUseCase: DeleteFavouritesUseCase by inject()
     fun loadOffers() {
-        launchOperation(operation = {
-            offersUseCase(OffersUseCase.Params())
+        launchOperation(operation = { scope ->
+            offersUseCase(scope, OffersUseCase.Params())
         }, success = {
             setState { state.value.copy(offers = it) }
         })
     }
 
     fun loadVacancies() {
-        launchOperation(operation = {
-            vacanciesUseCase(VacanciesUseCase.Params())
+        launchOperation(operation = { scope ->
+            vacanciesUseCase(scope, VacanciesUseCase.Params())
         }, success = {
             setState { state.value.copy(vacancy = it) }
         })
     }
 
     fun isFavourites(item: VacancyUI) {
-        launchOperation(operation = {
-            if (item.isFavorite) deleteFavouritesUseCase(DeleteFavouritesUseCase.Params(item.id))
-            else addFavouritesUseCase(AddFavouritesUseCase.Params(item.id))
+        launchOperation(operation = { scope ->
+            if (item.isFavorite) deleteFavouritesUseCase(
+                scope,
+                DeleteFavouritesUseCase.Params(item.id)
+            )
+            else addFavouritesUseCase(scope, AddFavouritesUseCase.Params(item.id))
         }, success = {
             setState {
                 state.value.copy(vacancy = state.value.vacancy.map {

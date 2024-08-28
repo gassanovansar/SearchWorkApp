@@ -2,17 +2,16 @@ package com.example.core.base
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
+import com.example.corekt.Either
+import com.example.corekt.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.time.delay
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 
@@ -48,15 +47,16 @@ abstract class BaseScreenModel<State : Any, Event : Any>(initState: State) : Scr
     }
 
     protected fun <T> launchOperation(
-        operation: suspend () -> T,
-        success: (T) -> Unit = {},
-        loading: (Boolean) -> Unit = { setStatus(it) }
+        operation: suspend (CoroutineScope) -> Either<Failure, T>,
+        loading: (Boolean) -> Unit = { setStatus(it) },
+        failure: (Failure) -> Unit = {},
+        success: (T) -> Unit = {}
     ) {
         loading.invoke(true)
         screenModelScope.launch {
-            success(withContext(ioScope.coroutineContext) {
-                operation()
-            })
+            withContext(ioScope.coroutineContext) {
+                operation(this)
+            }.fold(failure, success)
         }
         loading.invoke(false)
     }

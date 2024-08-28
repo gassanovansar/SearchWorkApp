@@ -1,5 +1,8 @@
 package com.example.favourite.data
 
+import com.example.corekt.Either
+import com.example.corekt.Failure
+import com.example.corekt.apiCall
 import com.example.source.LocalSource
 import com.example.models.mappers.toUI
 import com.example.favourite.domain.FavouriteRepository
@@ -10,16 +13,24 @@ class FavouriteRepositoryImpl(private val source: LocalSource) : FavouriteReposi
 
     override val favouriteCountFlow: Flow<Int> = source.favouriteCountFlow
 
-    override suspend fun favourites(): List<VacancyUI> {
-        return source.loadFavourites().map { it.toUI() }
+    override suspend fun favourites(): Either<Failure, List<VacancyUI>> {
+        return apiCall(call = {
+            source.loadFavourites()
+        }, mapResponse = {
+            it.map { it.toUI() }
+        })
     }
 
-    override suspend fun addFavourites(id: String) {
-        source.addFavourites(id)
+    override suspend fun addFavourites(id: String): Either<Failure, Unit> {
+        return apiCall {
+            source.addFavourites(id)
+        }
     }
 
-    override suspend fun deleteFavourites(id: String) {
-        source.deleteFavourites(id)
+    override suspend fun deleteFavourites(id: String): Either<Failure, Unit> {
+        return apiCall {
+            source.deleteFavourites(id)
+        }
     }
 
 }

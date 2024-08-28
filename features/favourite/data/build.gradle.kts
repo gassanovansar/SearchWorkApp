@@ -28,7 +28,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget ="17"
+        jvmTarget = "17"
     }
 }
 
@@ -43,4 +43,5 @@ dependencies {
     implementation(projects.models.mappers)
     implementation(projects.source)
     implementation(projects.features.favourite.domain)
+    implementation(projects.corekt)
 }

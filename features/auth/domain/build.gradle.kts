@@ -8,6 +8,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 dependencies {
-    //TODO FIX
     implementation(projects.corekt)
+    implementation(libs.kotlinx.coroutines.core)
 }

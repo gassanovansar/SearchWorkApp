@@ -42,6 +42,7 @@ dependencies {
     implementation(projects.models.domain)
     implementation(projects.models.mappers)
     implementation(projects.source)
+    implementation(projects.corekt)
     implementation(projects.features.detail.domain)
 
 

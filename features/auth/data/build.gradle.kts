@@ -28,7 +28,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget ="17"
+        jvmTarget = "17"
     }
 }
 
@@ -42,4 +42,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(projects.managers)
     implementation(projects.features.auth.domain)
+
+    implementation(projects.corekt)
 }

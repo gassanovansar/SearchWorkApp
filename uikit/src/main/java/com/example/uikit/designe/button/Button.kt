@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import com.example.uikit.theme.AppTheme
 
 @Composable
- fun PrimaryButton(
+fun PrimaryButton(
     text: String,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,

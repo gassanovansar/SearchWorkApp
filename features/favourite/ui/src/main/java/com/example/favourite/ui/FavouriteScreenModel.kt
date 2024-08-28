@@ -14,17 +14,20 @@ class FavouriteScreenModel : BaseScreenModel<FavouriteState, Any>(FavouriteState
     private val deleteFavouritesUseCase: DeleteFavouritesUseCase by inject()
 
     fun loadFavourites() {
-        launchOperation(operation = {
-            favouritesUseCase(FavouritesUseCase.Params())
+        launchOperation(operation = { scope ->
+            favouritesUseCase(scope, FavouritesUseCase.Params())
         }, success = {
             setState { state.value.copy(favourites = it) }
         })
     }
 
     fun isFavourites(item: VacancyUI) {
-        launchOperation(operation = {
-            if (item.isFavorite) deleteFavouritesUseCase(DeleteFavouritesUseCase.Params(item.id))
-            else addFavouritesUseCase(AddFavouritesUseCase.Params(item.id))
+        launchOperation(operation = { scope ->
+            if (item.isFavorite) deleteFavouritesUseCase(
+                scope,
+                DeleteFavouritesUseCase.Params(item.id)
+            )
+            else addFavouritesUseCase(scope, AddFavouritesUseCase.Params(item.id))
         }, success = {
             setState {
                 state.value.copy(favourites = state.value.favourites.map {

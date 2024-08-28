@@ -10,4 +10,6 @@ java {
 dependencies {
     implementation(projects.models.domain)
     implementation(projects.corekt)
+    implementation(projects.corekt)
+    implementation(libs.kotlinx.coroutines.core)
 }

@@ -46,6 +46,13 @@ abstract class BaseScreenModel<State : Any, Event : Any>(initState: State) : Scr
         }
     }
 
+    /**
+     * Выполнить запросы
+     * @param operation - описываем запрос
+     * @param loading - статус загрузки(можем переопределить)
+     * @param failure - подписка на ошибку(можем переопределить)
+     * @param success - результат
+     */
     protected fun <T> launchOperation(
         operation: suspend (CoroutineScope) -> Either<Failure, T>,
         loading: (Boolean) -> Unit = { setStatus(it) },

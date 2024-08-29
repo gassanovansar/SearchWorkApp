@@ -43,5 +43,8 @@ dependencies {
     implementation(projects.managers)
     implementation(projects.features.auth.domain)
 
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.retrofit2)
+
     implementation(projects.corekt)
 }

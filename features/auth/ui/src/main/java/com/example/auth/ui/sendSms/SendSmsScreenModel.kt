@@ -14,6 +14,10 @@ class SendSmsScreenModel : BaseScreenModel<SendSmsState, Any>(SendSmsState.Defau
     fun changeIsAuth() {
         launchOperation(operation = { scope ->
             authUseCase(scope, AuthUseCase.Params())
+        }, success = {
+            println()
+        }, failure = {
+            println()
         })
     }
 }

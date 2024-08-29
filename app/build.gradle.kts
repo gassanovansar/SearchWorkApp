@@ -86,6 +86,13 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
 
+       /**
+     * Retrofit2
+     */
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.retrofit2)
+
+
     implementation(projects.core)
     implementation(projects.uikit)
     implementation(projects.models.domain)

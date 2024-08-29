@@ -14,5 +14,5 @@ val repositoryModule = module {
     single<MainRepository> { MainRepositoryImpl(get()) }
     single<DetailRepository> { DetailRepositoryImpl(get()) }
     single<FavouriteRepository> { FavouriteRepositoryImpl(get()) }
-    single<AuthRepository> { AuthRepositoryImpl(get()) }
+    single<AuthRepository> { AuthRepositoryImpl(get(),get()) }
 }

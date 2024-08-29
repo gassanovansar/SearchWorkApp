@@ -7,6 +7,8 @@ object KoinInjector {
     val koinApp = startKoin {
         modules(
             listOf(
+                networkModule,
+                apiModile,
                 useCaseModule,
                 repositoryModule,
                 sourceModule,
